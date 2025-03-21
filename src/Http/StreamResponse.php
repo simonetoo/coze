@@ -12,8 +12,9 @@ class StreamResponse extends Response implements IteratorAggregate
      */
     public function getIterator(): Traversable
     {
-        foreach ($this->response->getBody() as $chunk) {
-            yield $chunk;
+        $body = $this->response->getBody();
+        while (!$body->eof()) {
+            yield $body->read(1024);
         }
     }
 }

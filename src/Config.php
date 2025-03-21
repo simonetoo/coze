@@ -3,6 +3,7 @@
 namespace Simonetoo\Coze;
 
 use Psr\Log\LoggerInterface;
+use GuzzleHttp\HandlerStack;
 
 class Config
 {
@@ -13,6 +14,8 @@ class Config
     protected int $timeout;
 
     protected LoggerInterface $logger;
+
+    protected HandlerStack $handler;
 
     /**
      * 初始化配置
@@ -25,6 +28,7 @@ class Config
         $this->baseUrl = $options['baseUrl'] ?? 'https://api.coze.cn';
         $this->timeout = $options['timeout'] ?? 30;
         $this->logger = $options['logger'] ?? new Logger;
+        $this->handler = $options['handler'] ?? HandlerStack::create();
     }
 
     public function getToken(): string
@@ -45,5 +49,9 @@ class Config
     public function getLogger(): LoggerInterface
     {
         return $this->logger;
+    }
+
+    public function getHandler():HandlerStack{
+        return $this->handler;
     }
 }

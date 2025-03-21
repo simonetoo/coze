@@ -18,14 +18,25 @@ class JsonResponse extends Response
     public function json(string|array|null $key = null, mixed $default = null): mixed
     {
         if (empty($this->decodedJson)) {
-            if (empty($this->body)) {
+            $body = (string) $this->getBody();
+            if (empty($body)) {
                 $this->decodedJson = [];
             } else {
-                $this->decodedJson = json_decode($this->body, true);
+                $this->decodedJson = json_decode($body, true);
             }
         }
 
         return $this->dataGet($this->decodedJson, $key, $default);
+    }
+    
+    /**
+     * 获取响应数据
+     *
+     * @return array 解析后的JSON数据
+     */
+    public function getData(): array
+    {
+        return $this->json();
     }
 
     private function dataGet(array $target, string|array|null $key = null, mixed $default = null): mixed

@@ -19,10 +19,10 @@ class Coze implements CozeInterface
     /**
      * 初始化Coze客户端
      *
-     * @param  string  $token  个人访问令牌(PAT)
+     * @param  string|Config  $token  个人访问令牌(PAT)
      * @param  array  $options  客户端选项
      */
-    public function __construct(string $token, array $options = [])
+    public function __construct(string|Config $token, array $options = [])
     {
         $this->config = new Config($token, $options);
         $this->httpClient = new HttpClient($this->config);

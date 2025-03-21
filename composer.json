@@ -25,7 +25,7 @@
         "symfony/http-foundation": "^6.0|^7.0"
     },
     "require-dev": {
-        "laravel/pint": "^1.21",
+        "laravel/pint": "^1.0",
         "mockery/mockery": "^1.5",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": "^9.5",
@@ -38,7 +38,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Coze\\Tests\\": "tests/"
+            "Simonetoo\\Coze\\Tests\\": "tests/"
         }
     },
     "config": {

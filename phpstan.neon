@@ -3,6 +3,3 @@ parameters:
     paths:
         - src
         - tests
-    excludePaths:
-        - vendor
-    checkMissingIterableValueType: false
