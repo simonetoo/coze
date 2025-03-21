@@ -1,8 +1,8 @@
 <?php
-
 namespace Simonetoo\Coze\Contracts;
 
 use Simonetoo\Coze\Resources\Bots;
+use Simonetoo\Coze\Resources\Files;
 use Simonetoo\Coze\Config;
 use Simonetoo\Coze\Http\HttpClient;
 
@@ -28,4 +28,11 @@ interface CozeInterface
      * @return Bots
      */
     public function bots(): Bots;
+
+    /**
+     * 获取Files API资源
+     *
+     * @return Files
+     */
+    public function files(): Files;
 }
