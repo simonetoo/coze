@@ -14,7 +14,9 @@ class Bots extends Resource
      * @param  int  $page  页码
      * @param  int  $limit  每页数量
      * @return Response 机器人列表数据
+     *
      * @throws ApiException
+     *
      * @see https://www.coze.cn/open/docs/developer_guides/published_bots_list
      */
     public function list(string $spaceId, int $page = 1, int $limit = 10): Response
@@ -31,7 +33,9 @@ class Bots extends Resource
      *
      * @param  string  $botId  机器人ID
      * @return Response 机器人详情数据
+     *
      * @throws ApiException 请求异常
+     *
      * @see https://www.coze.cn/open/docs/developer_guides/get_metadata
      */
     public function get(string $botId): Response
@@ -47,10 +51,10 @@ class Bots extends Resource
      * @param  string  $spaceId  空间ID
      * @param  string  $name  机器人名称
      * @param  string  $description  机器人描述
-     * @param  array  $payload
-     * @param  array  $options
      * @return Response 创建的机器人数据
+     *
      * @throws ApiException 请求异常
+     *
      * @see https://www.coze.cn/open/docs/developer_guides/create_bot
      */
     public function create(
@@ -72,15 +76,16 @@ class Bots extends Resource
      *
      * @param  string  $botId  机器人ID
      * @param  string  $name  机器人名称
-     * @param  array  $payload
-     * @param  array  $options
      * @return Response 更新后的机器人数据
+     *
      * @throws ApiException 请求异常
+     *
      * @see https://www.coze.cn/open/docs/developer_guides/update_bot
      */
     public function update(string $botId, string $name, array $payload = [], array $options = []): Response
     {
         $payload['bot_id'] = $botId;
+
         return $this->client->postJson('/v1/bot/update', $payload, $options);
     }
 }

@@ -15,10 +15,10 @@ class NotFoundException extends ApiException
      * @param  Throwable|null  $previous  上一个异常
      */
     public function __construct(
-        string $message = "Resource Not Found",
+        string $message = 'Resource Not Found',
         int $code = 404,
         array $errorData = [],
-        Throwable|null $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct($message, $code, $errorData, $previous);
     }

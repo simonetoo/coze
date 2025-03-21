@@ -9,7 +9,7 @@ class ConfigTest extends TestCase
 {
     private string $token = 'test_token';
 
-    public function testConstructorWithDefaultOptions(): void
+    public function test_constructor_with_default_options(): void
     {
         $config = new Config($this->token);
 
@@ -18,7 +18,7 @@ class ConfigTest extends TestCase
         $this->assertEquals(30, $config->getTimeout());
     }
 
-    public function testConstructorWithCustomOptions(): void
+    public function test_constructor_with_custom_options(): void
     {
         $options = [
             'baseUrl' => 'https://custom-api.coze.cn',
@@ -34,13 +34,13 @@ class ConfigTest extends TestCase
         $this->assertEquals(60, $config->getTimeout());
     }
 
-    public function testGetToken(): void
+    public function test_get_token(): void
     {
         $config = new Config($this->token);
         $this->assertEquals($this->token, $config->getToken());
     }
 
-    public function testGetBaseUrl(): void
+    public function test_get_base_url(): void
     {
         $config = new Config($this->token);
         $this->assertEquals('https://api.coze.cn', $config->getBaseUrl());
@@ -49,7 +49,7 @@ class ConfigTest extends TestCase
         $this->assertEquals('https://custom-api.coze.cn', $config->getBaseUrl());
     }
 
-    public function testGetTimeout(): void
+    public function test_get_timeout(): void
     {
         $config = new Config($this->token);
         $this->assertEquals(30, $config->getTimeout());
@@ -57,5 +57,4 @@ class ConfigTest extends TestCase
         $config = new Config($this->token, ['timeout' => 60]);
         $this->assertEquals(60, $config->getTimeout());
     }
-
 }

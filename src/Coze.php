@@ -1,18 +1,21 @@
 <?php
+
 namespace Simonetoo\Coze;
+
+use Simonetoo\Coze\Contracts\CozeInterface;
+use Simonetoo\Coze\Http\HttpClient;
 use Simonetoo\Coze\Resources\Bots;
 use Simonetoo\Coze\Resources\Files;
 use Simonetoo\Coze\Resources\Resource;
-use Simonetoo\Coze\Contracts\CozeInterface;
-use Simonetoo\Coze\Http\HttpClient;
+
 class Coze implements CozeInterface
 {
-    /** @var HttpClient */
     protected HttpClient $httpClient;
-    /** @var Config */
+
     protected Config $config;
-    /** @var array */
+
     protected array $resources = [];
+
     /**
      * 初始化Coze客户端
      *
@@ -24,6 +27,7 @@ class Coze implements CozeInterface
         $this->config = new Config($token, $options);
         $this->httpClient = new HttpClient($this->config);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +35,7 @@ class Coze implements CozeInterface
     {
         return $this->config;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -38,6 +43,7 @@ class Coze implements CozeInterface
     {
         return $this->httpClient;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -45,7 +51,7 @@ class Coze implements CozeInterface
     {
         return $this->getResource(Bots::class);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -53,18 +59,20 @@ class Coze implements CozeInterface
     {
         return $this->getResource(Files::class);
     }
-    
+
     /**
      * 获取API资源实例（按需实例化）
      *
-     * @param  string  $class  API资源类名
-     * @return mixed API资源实例
+     * @template T of Resource
+     * @param  class-string<T>  $class  API资源类名
+     * @return T API资源实例
      */
     protected function getResource(string $class): Resource
     {
         if (! isset($this->resources[$class])) {
             $this->resources[$class] = new $class($this->httpClient);
         }
+
         return $this->resources[$class];
     }
 }

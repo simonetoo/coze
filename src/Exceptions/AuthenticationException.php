@@ -15,10 +15,10 @@ class AuthenticationException extends ApiException
      * @param  Throwable|null  $previous  上一个异常
      */
     public function __construct(
-        string $message = "Authentication Failed",
+        string $message = 'Authentication Failed',
         int $code = 401,
         array $errorData = [],
-        Throwable|null $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct($message, $code, $errorData, $previous);
     }

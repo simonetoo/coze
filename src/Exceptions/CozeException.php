@@ -6,7 +6,6 @@ use Throwable;
 
 class CozeException extends \Exception
 {
-    /** @var array|null */
     protected ?array $errorData;
 
     /**
@@ -18,10 +17,10 @@ class CozeException extends \Exception
      * @param  Throwable|null  $previous  上一个异常
      */
     public function __construct(
-        string $message = "",
+        string $message = '',
         int $code = 0,
-        array|null $errorData = null,
-        Throwable|null $previous = null
+        ?array $errorData = null,
+        ?Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
         $this->errorData = $errorData;
@@ -29,8 +28,6 @@ class CozeException extends \Exception
 
     /**
      * 获取错误数据
-     *
-     * @return array|null
      */
     public function getErrorData(): ?array
     {

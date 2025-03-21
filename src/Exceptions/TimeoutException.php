@@ -14,7 +14,7 @@ class TimeoutException extends ApiException
      * @param  array  $errorData  错误数据
      * @param  Throwable|null  $previous  上一个异常
      */
-    public function __construct(string $message = "Request Timeout", int $code = 408, array $errorData = [], Throwable|null $previous = null)
+    public function __construct(string $message = 'Request Timeout', int $code = 408, array $errorData = [], ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $errorData, $previous);
     }

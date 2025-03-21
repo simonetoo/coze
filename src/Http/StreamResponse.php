@@ -2,16 +2,13 @@
 
 namespace Simonetoo\Coze\Http;
 
-use Traversable;
 use IteratorAggregate;
+use Traversable;
 
 class StreamResponse extends Response implements IteratorAggregate
 {
-
     /**
      * 处理流式响应
-     *
-     * @return Traversable
      */
     public function getIterator(): Traversable
     {
