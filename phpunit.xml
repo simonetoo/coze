@@ -25,7 +25,7 @@
         </include>
         <report>
             <html outputDirectory="coverage" lowUpperBound="50" highLowerBound="80"/>
-            <text outputFile="coverage.txt" showUncoveredFiles="true" showOnlySummary="false"/>
+            <text outputFile="coverage/coverage.txt" showUncoveredFiles="true" showOnlySummary="false"/>
         </report>
     </coverage>
 </phpunit>
