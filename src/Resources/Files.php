@@ -20,7 +20,7 @@ class Files extends Resource
      */
     public function upload(string $filePath): Response
     {
-        if (!file_exists($filePath)) {
+        if (! file_exists($filePath)) {
             throw new \InvalidArgumentException("File does not exist: {$filePath}");
         }
 

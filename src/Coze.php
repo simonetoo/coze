@@ -2,6 +2,7 @@
 
 namespace Simonetoo\Coze;
 
+use GuzzleHttp\HandlerStack;
 use Simonetoo\Coze\Contracts\CozeInterface;
 use Simonetoo\Coze\Http\HttpClient;
 use Simonetoo\Coze\Resources\Bots;
@@ -12,28 +13,28 @@ class Coze implements CozeInterface
 {
     protected HttpClient $httpClient;
 
-    protected Config $config;
-
     protected array $resources = [];
+
+    protected HandlerStack $stack;
 
     /**
      * 初始化Coze客户端
      *
-     * @param  string|Config  $token  个人访问令牌(PAT)
      * @param  array  $options  客户端选项
      */
-    public function __construct(string|Config $token, array $options = [])
+    public function __construct(array $options = [])
     {
-        $this->config = new Config($token, $options);
-        $this->httpClient = new HttpClient($this->config);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfig(): Config
-    {
-        return $this->config;
+        $this->stack = $options['handler'] ?? HandlerStack::create();
+        $headers = $options['headers'] ?? [];
+        if (! empty($options['token'])) {
+            $headers['Authorization'] = "Bearer {$options['token']}";
+        }
+        $this->httpClient = new HttpClient([
+            ...$options,
+            'handler' => $this->stack,
+            'base_uri' => $options['base_uri'] ?? 'https://api.cozei.cn',
+            'headers' => $headers,
+        ]);
     }
 
     /**
@@ -42,6 +43,12 @@ class Coze implements CozeInterface
     public function getHttpClient(): HttpClient
     {
         return $this->httpClient;
+    }
+
+    public function middleware(callable $callback): self
+    {
+        $this->stack->push($callback);
+        return $this;
     }
 
     /**
@@ -64,10 +71,11 @@ class Coze implements CozeInterface
      * 获取API资源实例（按需实例化）
      *
      * @template T of Resource
+     *
      * @param  class-string<T>  $class  API资源类名
-     * @return T API资源实例
+     * @return T
      */
-    protected function getResource(string $class): Resource
+    protected function getResource(string $class)
     {
         if (! isset($this->resources[$class])) {
             $this->resources[$class] = new $class($this->httpClient);
@@ -75,4 +83,6 @@ class Coze implements CozeInterface
 
         return $this->resources[$class];
     }
+
+
 }

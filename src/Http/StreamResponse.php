@@ -13,7 +13,7 @@ class StreamResponse extends Response implements IteratorAggregate
     public function getIterator(): Traversable
     {
         $body = $this->response->getBody();
-        while (!$body->eof()) {
+        while (! $body->eof()) {
             yield $body->read(1024);
         }
     }

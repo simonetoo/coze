@@ -2,8 +2,8 @@
 
 namespace Simonetoo\Coze;
 
-use Psr\Log\LoggerInterface;
 use GuzzleHttp\HandlerStack;
+use Psr\Log\LoggerInterface;
 
 class Config
 {
@@ -51,7 +51,8 @@ class Config
         return $this->logger;
     }
 
-    public function getHandler():HandlerStack{
+    public function getHandler(): HandlerStack
+    {
         return $this->handler;
     }
 }

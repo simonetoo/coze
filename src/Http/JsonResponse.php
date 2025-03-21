@@ -28,7 +28,7 @@ class JsonResponse extends Response
 
         return $this->dataGet($this->decodedJson, $key, $default);
     }
-    
+
     /**
      * 获取响应数据
      *

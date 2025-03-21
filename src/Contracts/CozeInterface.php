@@ -10,11 +10,6 @@ use Simonetoo\Coze\Resources\Files;
 interface CozeInterface
 {
     /**
-     * 获取配置
-     */
-    public function getConfig(): Config;
-
-    /**
      * 获取HTTP客户端
      */
     public function getHttpClient(): HttpClient;
