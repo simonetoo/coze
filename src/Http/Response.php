@@ -16,8 +16,6 @@ abstract class Response
 
     /**
      * 获取Psr原始响应
-     *
-     * @return ResponseInterface
      */
     public function getPsrResponse(): ResponseInterface
     {
@@ -26,8 +24,6 @@ abstract class Response
 
     /**
      * 获取HTTP状态码
-     *
-     * @return int
      */
     public function getStatusCode(): int
     {
@@ -36,8 +32,6 @@ abstract class Response
 
     /**
      * 获取所有响应头
-     *
-     * @return array
      */
     public function getHeaders(): array
     {
@@ -68,8 +62,6 @@ abstract class Response
 
     /**
      * 获取响应体
-     *
-     * @return StreamInterface
      */
     public function getBody(): StreamInterface
     {
@@ -78,8 +70,6 @@ abstract class Response
 
     /**
      * 将响应对象转换为字符串
-     *
-     * @return string
      */
     public function __toString(): string
     {

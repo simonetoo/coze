@@ -20,10 +20,8 @@ use Simonetoo\Coze\Exceptions\TimeoutException;
 
 class HttpClient implements HttpClientInterface
 {
-    /** @var Config */
     protected Config $config;
 
-    /** @var GuzzleClient */
     protected GuzzleClient $client;
 
     /**
@@ -51,6 +49,7 @@ class HttpClient implements HttpClientInterface
     {
         $options['query'] = $query;
         $response = $this->request('GET', $path, $options);
+
         return new JsonResponse($response);
     }
 
@@ -61,6 +60,7 @@ class HttpClient implements HttpClientInterface
     {
         $options['json'] = $data;
         $response = $this->request('POST', $path, $options);
+
         return new JsonResponse($response);
     }
 
@@ -70,6 +70,7 @@ class HttpClient implements HttpClientInterface
     public function post(string $path, array $options = []): JsonResponse
     {
         $response = $this->request('POST', $path, $options);
+
         return new JsonResponse($response);
     }
 
@@ -91,6 +92,7 @@ class HttpClient implements HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
      * @return ResponseInterface 响应对象
+     *
      * @throws ApiException 请求异常
      */
     protected function request(
@@ -111,7 +113,7 @@ class HttpClient implements HttpClientInterface
      * 处理请求异常
      *
      * @param  RequestException  $e  请求异常
-     * @return never
+     *
      * @throws ApiException 转换后的API异常
      */
     protected function handleRequestException(RequestException $e): never

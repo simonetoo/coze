@@ -14,7 +14,7 @@ class RateLimitException extends ApiException
      * @param  array  $errorData  错误数据
      * @param  Throwable|null  $previous  上一个异常
      */
-    public function __construct(string $message = "Rate Limit Exceeded", int $code = 429, array $errorData = [], Throwable|null $previous = null)
+    public function __construct(string $message = 'Rate Limit Exceeded', int $code = 429, array $errorData = [], ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $errorData, $previous);
     }

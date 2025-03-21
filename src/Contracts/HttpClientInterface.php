@@ -15,6 +15,7 @@ interface HttpClientInterface
      * @param  array  $query  查询参数
      * @param  array  $options  请求选项
      * @return Response 响应对象
+     *
      * @throws ApiException 请求异常
      */
     public function get(string $path, array $query = [], array $options = []): Response;
@@ -25,6 +26,7 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
      * @return Response 响应对象
+     *
      * @throws ApiException 请求异常
      */
     public function post(string $path, array $options = []): Response;
@@ -36,6 +38,7 @@ interface HttpClientInterface
      * @param  array  $data  请求数据
      * @param  array  $options  请求选项
      * @return Response 响应对象
+     *
      * @throws ApiException 请求异常
      */
     public function postJson(string $path, array $data = [], array $options = []): Response;
@@ -47,6 +50,7 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
      * @return StreamResponse 流式响应对象
+     *
      * @throws ApiException 请求异常
      */
     public function stream(string $method, string $path, array $options = []): StreamResponse;

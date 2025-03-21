@@ -15,10 +15,10 @@ class UserAbortException extends ApiException
      * @param  Throwable|null  $previous  上一个异常
      */
     public function __construct(
-        string $message = "User Aborted Request",
+        string $message = 'User Aborted Request',
         int $code = 499,
         array $errorData = [],
-        Throwable|null $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct($message, $code, $errorData, $previous);
     }

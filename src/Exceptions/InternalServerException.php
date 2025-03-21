@@ -15,10 +15,10 @@ class InternalServerException extends ApiException
      * @param  Throwable|null  $previous  上一个异常
      */
     public function __construct(
-        string $message = "Internal Server Error",
+        string $message = 'Internal Server Error',
         int $code = 500,
         array $errorData = [],
-        Throwable|null $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct($message, $code, $errorData, $previous);
     }
