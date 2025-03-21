@@ -1,6 +1,6 @@
 {
     "name": "simonetoo/coze",
-    "description": "Official Coze PHP SDK for seamless AI integration into your applications",
+    "description": "Coze PHP SDK for seamless AI integration into your applications",
     "type": "library",
     "keywords": [
         "coze",
