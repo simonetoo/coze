@@ -1,14 +1,9 @@
 <?php
-require_once __DIR__.'/../../vendor/autoload.php';
-$config = require __DIR__.'/../config.php';
+require_once __DIR__.'/../init.php';
 
-use Simonetoo\Coze\Coze;
+$coze = coze_create();
 
+$response = $coze->bots()->list('7484524201249194023');
 
-$coze = new Coze([
-    'token' => $config['token'],
-]);
+coze_dump_response($response);
 
-$response = $coze->bots()->list($config('spaceId'));
-
-var_dump($response->json());
