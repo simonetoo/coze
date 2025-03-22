@@ -22,11 +22,11 @@ echo "\n-----------------------------------\n\n";
 try {
     echo "上传文件...\n";
     echo "文件路径: " . $testFilePath . "\n";
-    
+
     $response = $client->files()->upload($testFilePath);
     echo "响应状态码: " . $response->json('code') . "\n";
     echo "响应消息: " . $response->json('message') . "\n";
-    
+
     if ($response->json('code') === 0) {
         $fileInfo = $response->json('data') ?? [];
         echo "上传成功！\n";
@@ -35,7 +35,7 @@ try {
         echo "文件大小: " . ($fileInfo['size'] ?? '未返回大小') . " 字节\n";
         echo "内容类型: " . ($fileInfo['content_type'] ?? '未返回内容类型') . "\n";
         echo "上传时间: " . ($fileInfo['created_at'] ?? '未返回上传时间') . "\n";
-        
+
         // 保存文件ID用于后续示例
         $fileId = $fileInfo['file_id'] ?? $response->json('file_id');
         if ($fileId) {
@@ -58,15 +58,15 @@ echo "\n-----------------------------------\n\n";
  */
 try {
     echo "获取文件信息...\n";
-    
+
     // 使用上传的文件ID，如果没有则使用默认值
-    $retrieveFileId = isset($fileId) ? $fileId : 'your_file_id';
+    $retrieveFileId = $fileId ?? 'your_file_id';
     echo "文件ID: " . $retrieveFileId . "\n";
-    
+
     $response = $client->files()->retrieve($retrieveFileId);
     echo "响应状态码: " . $response->json('code') . "\n";
     echo "响应消息: " . $response->json('message') . "\n";
-    
+
     if ($response->json('code') === 0) {
         $fileInfo = $response->json('data') ?? [];
         echo "获取成功！\n";
@@ -76,7 +76,7 @@ try {
         echo "内容类型: " . ($fileInfo['content_type'] ?? '未返回内容类型') . "\n";
         echo "创建时间: " . ($fileInfo['created_at'] ?? '未返回创建时间') . "\n";
         echo "状态: " . ($fileInfo['status'] ?? '未返回状态') . "\n";
-        
+
         if (isset($fileInfo['url']) && $fileInfo['url']) {
             echo "文件URL: " . $fileInfo['url'] . "\n";
         } else {
@@ -96,10 +96,10 @@ echo "\n-----------------------------------\n\n";
  */
 try {
     echo "尝试上传不存在的文件...\n";
-    
+
     $nonExistentFilePath = __DIR__ . '/non_existent_file.txt';
     echo "文件路径: " . $nonExistentFilePath . "\n";
-    
+
     $response = $client->files()->upload($nonExistentFilePath);
     // 这行代码不会执行，因为上面会抛出异常
     echo "响应状态码: " . $response->json('code') . "\n";
@@ -118,14 +118,14 @@ echo "\n-----------------------------------\n\n";
  */
 try {
     echo "尝试获取不存在的文件信息...\n";
-    
+
     $nonExistentFileId = 'non_existent_file_id_' . time();
     echo "文件ID: " . $nonExistentFileId . "\n";
-    
+
     $response = $client->files()->retrieve($nonExistentFileId);
     echo "响应状态码: " . $response->json('code') . "\n";
     echo "响应消息: " . $response->json('message') . "\n";
-    
+
     if ($response->json('code') !== 0) {
         echo "预期的错误: 文件不存在\n";
     }

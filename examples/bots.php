@@ -9,11 +9,11 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL'
 ]);
 
-// 设置空间ID（使用用户提供的真实空间ID）
-$spaceId = '7407755085679837193';
+// 设置空间ID
+$spaceId = '7484524201249194023';
 
-// 设置机器人ID（使用用户提供的真实机器人ID）
-$botId = '7407755502459338761';
+// 设置机器人ID
+$botId = '7484523878849822754';
 
 /**
  * 示例1: 获取机器人列表
@@ -22,19 +22,19 @@ try {
     echo "获取机器人列表...\n";
     $response = $client->bots()->list($spaceId);
     echo "响应状态码: " . $response->json('code') . "\n";
-    echo "响应消息: " . $response->json('message') . "\n";
-    
+    echo "响应消息: " . $response->json('msg') . "\n";
+
     if ($response->json('code') === 0) {
         $bots = $response->json('data.bots') ?? [];
         $total = $response->json('data.total') ?? 0;
-        
+
         echo "总机器人数量: " . $total . "\n";
         echo "机器人列表:\n";
-        
+
         if (!empty($bots)) {
             foreach ($bots as $index => $bot) {
                 echo ($index + 1) . ". ID: " . $bot['bot_id'] . ", 名称: " . $bot['name'] . "\n";
-                
+
                 // 如果找到了机器人，更新botId变量以便后续示例使用
                 if ($index === 0) {
                     $botId = $bot['bot_id'];
@@ -50,7 +50,7 @@ try {
 } catch (Exception $e) {
     echo "获取机器人列表时发生错误: " . $e->getMessage() . "\n";
 }
-
+exit;
 echo "\n-----------------------------------\n\n";
 
 /**
@@ -59,11 +59,11 @@ echo "\n-----------------------------------\n\n";
 try {
     echo "获取机器人详情...\n";
     echo "使用机器人ID: " . $botId . "\n";
-    
+
     $response = $client->bots()->get($botId);
     echo "响应状态码: " . $response->json('code') . "\n";
-    echo "响应消息: " . $response->json('message') . "\n";
-    
+    echo "响应消息: " . $response->json('msg') . "\n";
+
     if ($response->json('code') === 0) {
         $botInfo = $response->json('data');
         echo "机器人ID: " . $botInfo['bot_id'] . "\n";
@@ -77,7 +77,7 @@ try {
 } catch (Exception $e) {
     echo "获取机器人详情时发生错误: " . $e->getMessage() . "\n";
 }
-
+exit;
 echo "\n-----------------------------------\n\n";
 
 /**
@@ -85,10 +85,10 @@ echo "\n-----------------------------------\n\n";
  */
 try {
     echo "创建新机器人...\n";
-    
+
     $botName = "测试机器人_" . date('YmdHis');
     $botDescription = "这是一个通过API创建的测试机器人，创建时间: " . date('Y-m-d H:i:s');
-    
+
     // 额外的payload数据
     $additionalPayload = [
         'settings' => [
@@ -96,26 +96,26 @@ try {
             'visibility' => 'private',
         ],
     ];
-    
+
     echo "机器人名称: " . $botName . "\n";
     echo "机器人描述: " . $botDescription . "\n";
-    
+
     $response = $client->bots()->create(
         $spaceId,
         $botName,
         $botDescription,
         $additionalPayload
     );
-    
+
     echo "响应状态码: " . $response->json('code') . "\n";
     echo "响应消息: " . $response->json('message') . "\n";
-    
+
     if ($response->json('code') === 0) {
         $newBot = $response->json('data') ?? [];
         echo "创建成功！\n";
         echo "新机器人ID: " . ($newBot['bot_id'] ?? $response->json('bot_id') ?? '未返回ID') . "\n";
         echo "新机器人名称: " . ($newBot['name'] ?? '未返回名称') . "\n";
-        
+
         // 保存新创建的机器人ID，用于后续更新示例
         $newBotId = $newBot['bot_id'] ?? $response->json('bot_id');
         if ($newBotId) {
@@ -138,11 +138,11 @@ echo "\n-----------------------------------\n\n";
  */
 try {
     echo "更新机器人...\n";
-    
+
     // 使用前面创建的机器人ID，如果没有则使用默认的
     $updateBotId = isset($newBotId) ? $newBotId : $botId;
     $updatedName = "更新后的机器人_" . date('YmdHis');
-    
+
     // 额外的payload数据
     $updatePayload = [
         'description' => "这是一个更新后的描述，更新时间: " . date('Y-m-d H:i:s'),
@@ -150,19 +150,19 @@ try {
             'visibility' => 'public',
         ],
     ];
-    
+
     echo "更新机器人ID: " . $updateBotId . "\n";
     echo "更新后的名称: " . $updatedName . "\n";
-    
+
     $response = $client->bots()->update(
         $updateBotId,
         $updatedName,
         $updatePayload
     );
-    
+
     echo "响应状态码: " . $response->json('code') . "\n";
     echo "响应消息: " . $response->json('message') . "\n";
-    
+
     if ($response->json('code') === 0) {
         $updatedBot = $response->json('data') ?? [];
         echo "更新成功！\n";
@@ -184,24 +184,24 @@ echo "\n-----------------------------------\n\n";
  */
 try {
     echo "分页获取机器人列表...\n";
-    
+
     $page = 1;
     $limit = 5;
-    
+
     echo "页码: " . $page . ", 每页数量: " . $limit . "\n";
-    
+
     $response = $client->bots()->list($spaceId, $page, $limit);
     echo "响应状态码: " . $response->json('code') . "\n";
     echo "响应消息: " . $response->json('message') . "\n";
-    
+
     if ($response->json('code') === 0) {
         $bots = $response->json('data.bots') ?? [];
         $total = $response->json('data.total') ?? 0;
-        
+
         echo "总机器人数量: " . $total . "\n";
         echo "当前页机器人数量: " . count($bots) . "\n";
         echo "机器人列表:\n";
-        
+
         if (!empty($bots)) {
             foreach ($bots as $index => $bot) {
                 echo ($index + 1) . ". ID: " . $bot['bot_id'] . ", 名称: " . $bot['name'] . "\n";
@@ -209,7 +209,7 @@ try {
         } else {
             echo "当前页没有机器人\n";
         }
-        
+
         // 计算总页数
         $totalPages = $total > 0 ? ceil($total / $limit) : 0;
         echo "总页数: " . $totalPages . "\n";
