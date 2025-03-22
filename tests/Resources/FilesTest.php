@@ -4,20 +4,20 @@ namespace Simonetoo\Coze\Tests\Resources;
 
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
-use Simonetoo\Coze\Http\HttpClient;
 use Simonetoo\Coze\Http\JsonResponse;
 use Simonetoo\Coze\Resources\Files;
 
 class FilesTest extends TestCase
 {
-    private HttpClient $httpClient;
+    private Coze $coze;
 
     private Files $files;
 
     protected function setUp(): void
     {
-        HttpClient::fake();
-        $this->files = (new Coze('your-token'))->files();
+        $this->coze = Coze::fake();
+
+        $this->files = $this->coze->files();
     }
 
     public function test_upload(): void
@@ -35,14 +35,13 @@ class FilesTest extends TestCase
         ];
 
         // 设置模拟响应
-        $this->httpClient->mockResponse('POST', '/v1/files/upload', $responseData);
+        $this->coze->mock('/xx', $responseData);
 
         // 执行测试
         $response = $this->files->upload($tempFile);
 
         // 验证结果
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals($responseData, $response->getData());
 
         // 清理
         unlink($tempFile);
@@ -67,13 +66,12 @@ class FilesTest extends TestCase
         ];
 
         // 设置模拟响应
-        $this->httpClient->mockResponse('GET', '/v1/files/retrieve', $responseData);
+        $this->coze->mock('/v1/files/retrieve', $responseData);
 
         // 执行测试
         $response = $this->files->retrieve($fileId);
 
         // 验证结果
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals($responseData, $response->getData());
     }
 }

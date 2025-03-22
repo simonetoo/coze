@@ -2,7 +2,6 @@
 
 namespace Simonetoo\Coze\Contracts;
 
-use Simonetoo\Coze\Config;
 use Simonetoo\Coze\Http\HttpClient;
 use Simonetoo\Coze\Resources\Bots;
 use Simonetoo\Coze\Resources\Files;

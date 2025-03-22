@@ -2,6 +2,7 @@
 
 namespace Simonetoo\Coze\Resources;
 
+use InvalidArgumentException;
 use Simonetoo\Coze\Exceptions\ApiException;
 use Simonetoo\Coze\Http\Response;
 
@@ -14,14 +15,14 @@ class Files extends Resource
      * @return Response 上传的文件信息
      *
      * @throws ApiException 请求异常
-     * @throws \InvalidArgumentException 当文件不存在时
+     * @throws InvalidArgumentException 当文件不存在时
      *
      * @see https://www.coze.cn/open/docs/developer_guides/upload_files
      */
     public function upload(string $filePath): Response
     {
         if (! file_exists($filePath)) {
-            throw new \InvalidArgumentException("File does not exist: {$filePath}");
+            throw new InvalidArgumentException("File does not exist: {$filePath}");
         }
 
         $multipart = [

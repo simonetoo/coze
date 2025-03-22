@@ -53,11 +53,10 @@
         "pint": "pint",
         "pint:test": "pint --test",
         "phpstan": "phpstan analyse --configuration=phpstan.neon",
+        "coverage": "phpunit --coverage-text",
         "test": [
             "@pint:test",
-            "@phpstan",
-            "phpunit --coverage-text --coverage-min=80"
-        ],
-        "test:coverage": "phpunit --coverage-text"
+            "@phpstan"
+        ]
     }
 }

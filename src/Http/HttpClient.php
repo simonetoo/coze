@@ -6,7 +6,6 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
-use Simonetoo\Coze\Config;
 use Simonetoo\Coze\Contracts\HttpClientInterface;
 use Simonetoo\Coze\Exceptions\ApiException;
 use Simonetoo\Coze\Exceptions\AuthenticationException;
@@ -20,20 +19,19 @@ use Simonetoo\Coze\Exceptions\TimeoutException;
 
 class HttpClient implements HttpClientInterface
 {
-    /**
-     * 配置对象
-     */
-    protected Config $config;
-
-    /**
-     * Guzzle HTTP 客户端
-     */
     protected GuzzleClient $client;
-
 
     public function __construct(array $options = [])
     {
-        $this->client = new GuzzleClient($options);
+        $headers = $options['headers'] ?? [];
+        if (! empty($options['token'])) {
+            $headers['Authorization'] = "Bearer {$options['token']}";
+        }
+        $this->client = new GuzzleClient([
+            ...$options,
+            'baseUri' => $options['baseUri'] ?? 'https://api.cozei.cn',
+            'headers' => $headers,
+        ]);
     }
 
     /**

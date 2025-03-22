@@ -29,16 +29,6 @@ class JsonResponse extends Response
         return $this->dataGet($this->decodedJson, $key, $default);
     }
 
-    /**
-     * 获取响应数据
-     *
-     * @return array 解析后的JSON数据
-     */
-    public function getData(): array
-    {
-        return $this->json();
-    }
-
     private function dataGet(array $target, string|array|null $key = null, mixed $default = null): mixed
     {
         if (is_null($key)) {
