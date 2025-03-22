@@ -3,7 +3,7 @@
 namespace Simonetoo\Coze\Contracts;
 
 use Simonetoo\Coze\Exceptions\ApiException;
-use Simonetoo\Coze\Http\Response;
+use Simonetoo\Coze\Http\JsonResponse;
 use Simonetoo\Coze\Http\StreamResponse;
 
 interface HttpClientInterface
@@ -14,22 +14,22 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $query  查询参数
      * @param  array  $options  请求选项
-     * @return Response 响应对象
+     * @return JsonResponse 响应对象
      *
      * @throws ApiException 请求异常
      */
-    public function get(string $path, array $query = [], array $options = []): Response;
+    public function get(string $path, array $query = [], array $options = []): JsonResponse;
 
     /**
      * 发送POST请求
      *
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
-     * @return Response 响应对象
+     * @return JsonResponse 响应对象
      *
      * @throws ApiException 请求异常
      */
-    public function post(string $path, array $options = []): Response;
+    public function post(string $path, array $options = []): JsonResponse;
 
     /**
      * 发送JSON POST请求
@@ -37,11 +37,11 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $data  请求数据
      * @param  array  $options  请求选项
-     * @return Response 响应对象
+     * @return JsonResponse 响应对象
      *
      * @throws ApiException 请求异常
      */
-    public function postJson(string $path, array $data = [], array $options = []): Response;
+    public function postJson(string $path, array $data = [], array $options = []): JsonResponse;
 
     /**
      * 发送流式请求

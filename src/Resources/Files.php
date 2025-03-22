@@ -4,7 +4,7 @@ namespace Simonetoo\Coze\Resources;
 
 use InvalidArgumentException;
 use Simonetoo\Coze\Exceptions\ApiException;
-use Simonetoo\Coze\Http\Response;
+use Simonetoo\Coze\Http\JsonResponse;
 
 class Files extends Resource
 {
@@ -12,14 +12,14 @@ class Files extends Resource
      * 上传文件到扣子平台
      *
      * @param  string  $filePath  要上传的文件路径
-     * @return Response 上传的文件信息
+     * @return JsonResponse 上传的文件信息
      *
      * @throws ApiException 请求异常
      * @throws InvalidArgumentException 当文件不存在时
      *
      * @see https://www.coze.cn/open/docs/developer_guides/upload_files
      */
-    public function upload(string $filePath): Response
+    public function upload(string $filePath): JsonResponse
     {
         if (! file_exists($filePath)) {
             throw new InvalidArgumentException("File does not exist: {$filePath}");
@@ -42,13 +42,13 @@ class Files extends Resource
      * 获取已上传文件的信息
      *
      * @param  string  $fileId  已上传的文件ID
-     * @return Response 文件信息
+     * @return JsonResponse 文件信息
      *
      * @throws ApiException 请求异常
      *
      * @see https://www.coze.cn/open/docs/developer_guides/retrieve_files
      */
-    public function retrieve(string $fileId): Response
+    public function retrieve(string $fileId): JsonResponse
     {
         return $this->client->get('/v1/files/retrieve', [
             'file_id' => $fileId,
