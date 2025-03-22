@@ -29,7 +29,7 @@ class HttpClient implements HttpClientInterface
         }
         $this->client = new GuzzleClient([
             ...$options,
-            'baseUri' => $options['baseUri'] ?? 'https://api.cozei.cn',
+            'base_uri' => $options['base_uri'] ?? 'https://api.coze.cn',
             'headers' => $headers,
         ]);
     }
@@ -99,12 +99,15 @@ class HttpClient implements HttpClientInterface
             $statusCode = $response ? $response->getStatusCode() : 0;
             $body = (string) $response?->getBody();
 
-            $errorData = null;
+            $errorData = [];
             $message = $e->getMessage();
 
             if (! empty($body)) {
-                $errorData = json_decode($body, true);
-                $message = $errorData['error']['message'] ?? $message;
+                $decodedData = json_decode($body, true);
+                if (is_array($decodedData)) {
+                    $errorData = $decodedData;
+                    $message = $errorData['error']['message'] ?? $message;
+                }
             }
 
             throw match ($statusCode) {

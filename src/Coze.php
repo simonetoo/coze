@@ -138,12 +138,39 @@ class Coze implements CozeInterface
 
     public function handleFakeRequest($request, $options): ResponseInterface
     {
-        return static::response('123')->getPsrResponse();
+        $path = $request->getUri()->getPath();
+        $method = $request->getMethod();
+
+        // 尝试匹配模拟的URL
+        foreach ($this->fakeCallbacks as $url => $callback) {
+            if (preg_match('#' . preg_quote($url, '#') . '#', $path)) {
+                $response = $callback($request, $options);
+                if ($response instanceof Response) {
+                    return $response->getPsrResponse();
+                }
+
+                return $response;
+            }
+        }
+
+        // 如果没有匹配到，抛出异常
+        throw new \RuntimeException("No mock response found for path: {$path}");
     }
 
     protected function matchFakeUrl($request, array $options = []): ?Response
     {
-        var_dump($request->getMethod(), $request->getUrl(), $options);
+        $path = $request->getUri()->getPath();
+
+        foreach ($this->fakeCallbacks as $url => $callback) {
+            if (preg_match('#' . preg_quote($url, '#') . '#', $path)) {
+                $response = $callback($request, $options);
+                if ($response instanceof Response) {
+                    return $response;
+                }
+
+                return null;
+            }
+        }
 
         return null;
     }
