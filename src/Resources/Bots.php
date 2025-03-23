@@ -11,21 +11,16 @@ class Bots extends Resource
      * 获取机器人列表
      *
      * @param  string  $spaceId  空间ID
-     * @param  int  $page  页码
-     * @param  int  $limit  每页数量
      * @return JsonResponse 机器人列表数据
      *
      * @throws ApiException
      *
      * @see https://www.coze.cn/open/docs/developer_guides/published_bots_list
      */
-    public function list(string $spaceId, int $page = 1, int $limit = 10): JsonResponse
+    public function list(string $spaceId, array $payload = []): JsonResponse
     {
-        return $this->client->get('/v1/space/published_bots_list', [
-            'space_id' => $spaceId,
-            'page_index' => $page,
-            'page_size' => $limit,
-        ]);
+        $payload['space_id'] = $spaceId;
+        return $this->client->get('/v1/space/published_bots_list', $payload);
     }
 
     /**
@@ -51,6 +46,7 @@ class Bots extends Resource
      * @param  string  $spaceId  空间ID
      * @param  string  $name  机器人名称
      * @param  string  $description  机器人描述
+     * @param  array  $payload  其他参数
      * @return JsonResponse 创建的机器人数据
      *
      * @throws ApiException 请求异常
@@ -61,31 +57,30 @@ class Bots extends Resource
         string $spaceId,
         string $name,
         string $description,
-        array $payload = [],
-        array $options = []
+        array $payload = []
     ): JsonResponse {
         $payload['space_id'] = $spaceId;
         $payload['name'] = $name;
         $payload['description'] = $description;
 
-        return $this->client->postJson('/v1/bot/create', $payload, $options);
+        return $this->client->postJson('/v1/bot/create', $payload);
     }
 
     /**
      * 更新机器人
      *
      * @param  string  $botId  机器人ID
-     * @param  string  $name  机器人名称
+     * @param  array  $payload  其他参数
      * @return JsonResponse 更新后的机器人数据
      *
      * @throws ApiException 请求异常
      *
      * @see https://www.coze.cn/open/docs/developer_guides/update_bot
      */
-    public function update(string $botId, string $name, array $payload = [], array $options = []): JsonResponse
+    public function update(string $botId, array $payload = []): JsonResponse
     {
         $payload['bot_id'] = $botId;
 
-        return $this->client->postJson('/v1/bot/update', $payload, $options);
+        return $this->client->postJson('/v1/bot/update', $payload);
     }
 }
