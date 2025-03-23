@@ -29,7 +29,7 @@ class HttpClient implements HttpClientInterface
         }
         $this->client = new GuzzleClient([
             ...$options,
-            'base_uri' => $options['base_uri'] ?? 'https://api.coze.cn',
+            'base_uri' => $options['base_uri'] ?? 'https://api.coze.com',
             'headers' => $headers,
         ]);
     }
@@ -62,6 +62,27 @@ class HttpClient implements HttpClientInterface
     public function post(string $path, array $options = []): JsonResponse
     {
         $response = $this->request('POST', $path, $options);
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(string $path, array $options = []): JsonResponse
+    {
+        $response = $this->request('DELETE', $path, $options);
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function patchJson(string $path, array $data = [], array $options = []): JsonResponse
+    {
+        $options['json'] = $data;
+        $response = $this->request('PATCH', $path, $options);
 
         return new JsonResponse($response);
     }

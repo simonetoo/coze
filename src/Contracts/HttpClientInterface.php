@@ -14,9 +14,9 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $query  查询参数
      * @param  array  $options  请求选项
-     * @return JsonResponse 响应对象
+     * @return JsonResponse
      *
-     * @throws ApiException 请求异常
+     * @throws ApiException
      */
     public function get(string $path, array $query = [], array $options = []): JsonResponse;
 
@@ -25,9 +25,9 @@ interface HttpClientInterface
      *
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
-     * @return JsonResponse 响应对象
+     * @return JsonResponse
      *
-     * @throws ApiException 请求异常
+     * @throws ApiException
      */
     public function post(string $path, array $options = []): JsonResponse;
 
@@ -37,11 +37,34 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $data  请求数据
      * @param  array  $options  请求选项
-     * @return JsonResponse 响应对象
+     * @return JsonResponse
      *
-     * @throws ApiException 请求异常
+     * @throws ApiException
      */
     public function postJson(string $path, array $data = [], array $options = []): JsonResponse;
+
+    /**
+     * 发送DELETE请求
+     *
+     * @param  string  $path  API路径
+     * @param  array  $options  请求选项
+     * @return JsonResponse
+     *
+     * @throws ApiException
+     */
+    public function delete(string $path, array $options = []): JsonResponse;
+
+    /**
+     * 发送JSON PATCH请求
+     *
+     * @param  string  $path  API路径
+     * @param  array  $data  请求数据
+     * @param  array  $options  请求选项
+     * @return JsonResponse
+     *
+     * @throws ApiException
+     */
+    public function patchJson(string $path, array $data = [], array $options = []): JsonResponse;
 
     /**
      * 发送流式请求
@@ -49,9 +72,9 @@ interface HttpClientInterface
      * @param  string  $method  请求方法
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
-     * @return StreamResponse 流式响应对象
+     * @return StreamResponse
      *
-     * @throws ApiException 请求异常
+     * @throws ApiException
      */
     public function stream(string $method, string $path, array $options = []): StreamResponse;
 }

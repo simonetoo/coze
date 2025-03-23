@@ -82,7 +82,10 @@ class BotsTest extends TestCase
         $this->client->mock('/v1/space/published_bots_list', $responseData);
 
         // 调用list方法，带分页参数
-        $response = $this->client->bots()->list('space_123', 2, 1);
+        $response = $this->client->bots()->list('space_123', [
+            'page_index' => 2,
+            'page_size' => 1
+        ]);
 
         // 验证响应
         $this->assertEquals(0, $response->json('code'));

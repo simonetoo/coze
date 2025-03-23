@@ -2,56 +2,41 @@
 
 namespace Simonetoo\Coze\Resources;
 
-use InvalidArgumentException;
 use Simonetoo\Coze\Exceptions\ApiException;
 use Simonetoo\Coze\Http\JsonResponse;
 
 class Files extends Resource
 {
     /**
-     * 上传文件到扣子平台
+     * 上传文件
      *
-     * @param  string  $filePath  要上传的文件路径
-     * @return JsonResponse 上传的文件信息
+     * @param string $filePath 文件路径
+     * @param array $payload 其他可选参数
+     * @return JsonResponse
      *
-     * @throws ApiException 请求异常
-     * @throws InvalidArgumentException 当文件不存在时
+     * @throws ApiException
      *
-     * @see https://www.coze.cn/open/docs/developer_guides/upload_files
+     * @see https://www.coze.com/open/docs/developer_guides/upload_files
      */
-    public function upload(string $filePath): JsonResponse
+    public function upload(string $filePath, array $payload = []): JsonResponse
     {
-        if (! file_exists($filePath)) {
-            throw new InvalidArgumentException("File does not exist: {$filePath}");
-        }
-
-        $multipart = [
-            [
-                'name' => 'file',
-                'contents' => fopen($filePath, 'r'),
-                'filename' => basename($filePath),
-            ],
-        ];
-
-        return $this->client->post('/v1/files/upload', [
-            'multipart' => $multipart,
-        ]);
+        $payload['file'] = $this->client->prepareFile($filePath);
+        
+        return $this->client->postMultipart('/v1/files', $payload);
     }
 
     /**
-     * 获取已上传文件的信息
+     * 获取文件详情
      *
-     * @param  string  $fileId  已上传的文件ID
-     * @return JsonResponse 文件信息
+     * @param string $fileId 文件ID
+     * @return JsonResponse
      *
-     * @throws ApiException 请求异常
+     * @throws ApiException
      *
-     * @see https://www.coze.cn/open/docs/developer_guides/retrieve_files
+     * @see https://www.coze.com/open/docs/developer_guides/retrieve_files
      */
     public function retrieve(string $fileId): JsonResponse
     {
-        return $this->client->get('/v1/files/retrieve', [
-            'file_id' => $fileId,
-        ]);
+        return $this->client->get("/v1/files/{$fileId}");
     }
 }

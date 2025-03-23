@@ -13,6 +13,7 @@ use Simonetoo\Coze\Http\JsonResponse;
 use Simonetoo\Coze\Http\Response;
 use Simonetoo\Coze\Http\StreamResponse;
 use Simonetoo\Coze\Resources\Bots;
+use Simonetoo\Coze\Resources\Datasets;
 use Simonetoo\Coze\Resources\Files;
 use Simonetoo\Coze\Resources\Resource;
 
@@ -56,6 +57,14 @@ class Coze implements CozeInterface
     public function files(): Files
     {
         return $this->getResource(Files::class);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function datasets(): Datasets
+    {
+        return $this->getResource(Datasets::class);
     }
 
     /**
