@@ -38,7 +38,7 @@ class Knowledge extends Resource
      * 删除知识库文件列表
      *
      * @see zh:https://www.coze.cn/open/docs/developer_guides/delete_knowdge_files
-     * @see en:https://www.coze.com/open/docs/developer_guides/delete_knowdge_files
+     * @see en:https://www.coze.com/open/docs/developer_guides/delete_knowledge_files
      */
     public function delete(): JsonResponse {}
 
@@ -46,7 +46,7 @@ class Knowledge extends Resource
      * 查看知识库文件上传进度
      *
      * @see zh:https://www.coze.cn/open/docs/developer_guides/get_dataset_progress
-     * @see en:https://www.coze.com/open/docs/developer_guides/get_dataset_progress
+     * @see en:https://www.coze.com/open/docs/developer_guides/7v3czmpi
      */
     public function process(): JsonResponse {}
 
