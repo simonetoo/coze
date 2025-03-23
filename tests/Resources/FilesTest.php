@@ -1,6 +1,6 @@
 <?php
 
-namespace Simonetoo\Coze\Tests;
+namespace Simonetoo\Coze\Tests\Resources;
 
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;

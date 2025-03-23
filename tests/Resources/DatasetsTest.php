@@ -1,6 +1,6 @@
 <?php
 
-namespace Simonetoo\Coze\Tests;
+namespace Simonetoo\Coze\Tests\Resources;
 
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
@@ -25,21 +25,24 @@ class DatasetsTest extends TestCase
         $this->datasets = $this->coze->datasets();
     }
 
-    public function test_list_method(): void
+    public function test_list(): void
     {
         // 模拟响应数据
         $responseData = [
+            'code' => 0,
+            'msg' => '',
             'data' => [
-                [
-                    'dataset_id' => $this->datasetId,
-                    'name' => 'Test Dataset',
-                    'description' => 'Test dataset description',
-                    'created_at' => '1719371007',
+                'total_count' => 1,
+                'dataset_list' => [
+                    [
+                        'dataset_id' => $this->datasetId,
+                        'name' => 'Test Dataset',
+                        'description' => 'Test dataset description',
+                        'created_at' => '1719371007',
+                    ],
                 ],
+
             ],
-            'total' => 1,
-            'page_num' => 1,
-            'page_size' => 10,
         ];
 
         // 模拟HTTP响应
@@ -58,11 +61,12 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_update_method(): void
+    public function test_update(): void
     {
         // 模拟响应数据
         $responseData = [
-            'success' => true,
+            'code' => 0,
+            'msg' => '',
         ];
 
         // 模拟HTTP响应
@@ -80,11 +84,12 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_delete_method(): void
+    public function test_delete(): void
     {
         // 模拟响应数据
         $responseData = [
-            'success' => true,
+            'code' => 0,
+            'msg' => '',
         ];
 
         // 模拟HTTP响应
@@ -98,7 +103,7 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_upload_documents_method(): void
+    public function test_upload_documents(): void
     {
         // 模拟响应数据
         $responseData = [
@@ -126,7 +131,7 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_update_document_method(): void
+    public function test_update_document(): void
     {
         // 模拟响应数据
         $responseData = [
@@ -145,10 +150,12 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_list_documents_method(): void
+    public function test_list_documents(): void
     {
         // 模拟响应数据
         $responseData = [
+            'code' => 0,
+            'msg' => '',
             'data' => [
                 [
                     'document_id' => $this->documentId,
@@ -178,10 +185,12 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_check_document_process_method(): void
+    public function test_check_document_process(): void
     {
         // 模拟响应数据
         $responseData = [
+            'code' => 0,
+            'msg' => '',
             'data' => [
                 [
                     'document_id' => $this->documentId,
@@ -203,7 +212,7 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_list_images_method(): void
+    public function test_list_images(): void
     {
         // 模拟响应数据
         $responseData = [
@@ -229,11 +238,12 @@ class DatasetsTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_update_image_caption_method(): void
+    public function test_update_image_caption(): void
     {
         // 模拟响应数据
         $responseData = [
-            'success' => true,
+            'code' => 0,
+            'msg' => '',
         ];
 
         // 模拟HTTP响应

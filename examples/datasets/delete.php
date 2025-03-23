@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Simon<shihuiqian@xvii.pro>
  */
@@ -10,7 +11,7 @@ $client = new Coze([
 ]);
 
 echo "删除知识库...\n";
-$datasetId = '7484881587176734755'; // 请替换为实际的知识库ID
+$datasetId = '7484881587176734755';
 
 // 注意：此操作会永久删除知识库，请谨慎使用
 echo "警告：此操作将永久删除知识库，请确认后再执行\n";

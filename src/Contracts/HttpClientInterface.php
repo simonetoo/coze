@@ -62,6 +62,17 @@ interface HttpClientInterface
     public function patchJson(string $path, array $data = [], array $options = []): JsonResponse;
 
     /**
+     * 发送JSON PUT请求
+     *
+     * @param  string  $path  API路径
+     * @param  array  $data  请求数据
+     * @param  array  $options  请求选项
+     *
+     * @throws ApiException
+     */
+    public function putJson(string $path, array $data = [], array $options = []): JsonResponse;
+
+    /**
      * 发送流式请求
      *
      * @param  string  $method  请求方法

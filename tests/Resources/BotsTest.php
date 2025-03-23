@@ -1,6 +1,6 @@
 <?php
 
-namespace Simonetoo\Coze\Tests;
+namespace Simonetoo\Coze\Tests\Resources;
 
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
@@ -27,9 +27,11 @@ class BotsTest extends TestCase
     {
         // 模拟响应数据
         $responseData = [
+            'code' => 0,
+            'msg' => 0,
             'data' => [
                 [
-                    'bot_id' => '7384641543992241234',
+                    'bot_id' => $this->botId,
                     'bot_name' => 'testbot',
                     'description' => 'Test bot description',
                     'icon_url' => 'https://example.com/icon.png',
@@ -80,8 +82,11 @@ class BotsTest extends TestCase
     {
         // 模拟响应数据
         $responseData = [
-            'bot_id' => '7342866812345678',
-            'logid' => '20250106172024B5F607030EFFAD653960',
+            'code' => 0,
+            'msg' => '',
+            'data' => [
+                'bot_id' => $this->botId,
+            ],
         ];
 
         // 模拟HTTP响应
@@ -111,7 +116,8 @@ class BotsTest extends TestCase
     {
         // 模拟响应数据
         $responseData = [
-            'success' => true,
+            'code' => 0,
+            'msg' => '',
         ];
 
         // 模拟HTTP响应

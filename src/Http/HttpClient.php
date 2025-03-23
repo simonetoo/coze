@@ -90,6 +90,17 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritdoc}
      */
+    public function putJson(string $path, array $data = [], array $options = []): JsonResponse
+    {
+        $options['json'] = $data;
+        $response = $this->request('PUT', $path, $options);
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function stream(string $method, string $path, array $options = []): StreamResponse
     {
         $options['stream'] = true;

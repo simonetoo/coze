@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
 use Simonetoo\Coze\Http\HttpClient;
 
-class ClientTest extends TestCase
+class CozeTest extends TestCase
 {
     private string $token = 'test_token';
 
