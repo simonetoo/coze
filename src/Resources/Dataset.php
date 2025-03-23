@@ -5,14 +5,13 @@ namespace Simonetoo\Coze\Resources;
 use Simonetoo\Coze\Exceptions\ApiException;
 use Simonetoo\Coze\Http\JsonResponse;
 
-class Datasets extends Resource
+class Dataset extends Resource
 {
     /**
      * 创建知识库
      *
-     * @param  string  $name  知识库名称
      * @param  string  $spaceId  空间ID
-     * @param  int  $formatType  格式类型
+     * @param  string  $name  知识库名称
      * @param  array  $payload  其他可选参数
      *
      * @throws ApiException
@@ -21,14 +20,15 @@ class Datasets extends Resource
      * @see en:https://www.coze.com/open/docs/developer_guides/create_dataset
      */
     public function create(
-        string $name,
         string $spaceId,
-        int $formatType,
+        string $name,
         array $payload = []
     ): JsonResponse {
         $payload['name'] = $name;
         $payload['space_id'] = $spaceId;
-        $payload['format_type'] = $formatType;
+        if (! isset($payload['format_type'])) {
+            $payload['format_type'] = 0;
+        }
 
         return $this->client->postJson('/v1/datasets', $payload);
     }

@@ -5,7 +5,7 @@ namespace Simonetoo\Coze\Resources;
 use Simonetoo\Coze\Exceptions\ApiException;
 use Simonetoo\Coze\Http\JsonResponse;
 
-class Files extends Resource
+class File extends Resource
 {
     /**
      * 上传文件
@@ -19,8 +19,13 @@ class Files extends Resource
      */
     public function upload(string $filePath): JsonResponse
     {
-        return $this->client->post('/v1/files', [
-            'body' => fopen($filePath, 'r'),
+        return $this->client->post('/v1/files/upload', [
+            'multipart' => [
+                [
+                    'name' => 'file',
+                    'contents' => fopen($filePath, 'r'),
+                ],
+            ],
         ]);
     }
 
@@ -36,6 +41,8 @@ class Files extends Resource
      */
     public function retrieve(string $fileId): JsonResponse
     {
-        return $this->client->get("/v1/files/{$fileId}");
+        return $this->client->get('/v1/files/retrieve', [
+            'file_id' => $fileId,
+        ]);
     }
 }

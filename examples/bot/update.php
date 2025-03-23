@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Simon<shihuiqian@xvii.pro>
+ * @author Simonetoo<simonetoo@xvii.pro>
  */
 
 require_once __DIR__.'/../../vendor/autoload.php';
@@ -15,7 +15,7 @@ $client = new Coze([
 $botId = '7484523878849822754';
 
 echo "更新机器人...\n";
-$response = $client->bots()->update(
+$response = $client->bot()->update(
     $botId,
     [
         'name' => '更新后的机器人_'.date('YmdHis'),

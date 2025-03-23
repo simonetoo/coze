@@ -19,11 +19,11 @@ class KnowledgeTest extends TestCase
     {
         $this->coze = Coze::fake();
         $this->knowledge = $this->coze->knowledge();
-        
+
         // 预先设置所有测试方法需要的模拟响应
         $this->setupMockResponses();
     }
-    
+
     private function setupMockResponses(): void
     {
         // 为create方法设置模拟响应
@@ -45,14 +45,14 @@ class KnowledgeTest extends TestCase
             ],
         ];
         $this->coze->mock('/open_api/knowledge/document/create', $createResponse);
-        
+
         // 为update方法设置模拟响应
         $updateResponse = [
             'code' => 0,
             'msg' => '',
         ];
         $this->coze->mock('/open_api/knowledge/document/update', $updateResponse);
-        
+
         // 为list方法设置模拟响应
         $listResponse = [
             'code' => 0,
@@ -70,14 +70,14 @@ class KnowledgeTest extends TestCase
             ],
         ];
         $this->coze->mock('/open_api/knowledge/document/list', $listResponse);
-        
+
         // 为delete方法设置模拟响应
         $deleteResponse = [
             'code' => 0,
             'msg' => '',
         ];
         $this->coze->mock('/open_api/knowledge/document/delete', $deleteResponse);
-        
+
         // 为process方法设置模拟响应
         $processResponse = [
             'code' => 0,
@@ -92,15 +92,15 @@ class KnowledgeTest extends TestCase
                 ],
             ],
         ];
-        $this->coze->mock('/v1/datasets/:dataset_id/process', $processResponse);
-        
+        $this->coze->mock('/v1/datasets/\d+/process', $processResponse);
+
         // 为imageCaption方法设置模拟响应
         $imageCaptionResponse = [
             'code' => 0,
             'msg' => '',
         ];
         $this->coze->mock('/open_api/knowledge/image/caption', $imageCaptionResponse);
-        
+
         // 为images方法设置模拟响应
         $imagesResponse = [
             'code' => 0,
@@ -117,10 +117,10 @@ class KnowledgeTest extends TestCase
                 'total' => 1,
             ],
         ];
-        $this->coze->mock('/v1/datasets/:dataset_id/images', $imagesResponse);
+        $this->coze->mock('/v1/datasets/\d+/images', $imagesResponse);
     }
 
-    public function test_create_method(): void
+    public function test_create(): void
     {
         // 调用create方法
         $documentBases = [
@@ -141,8 +141,8 @@ class KnowledgeTest extends TestCase
         // 测试带有额外参数的情况
         $response = $this->knowledge->create(
             $this->datasetId,
-            $documentBases,
             [
+                'document_bases' => $documentBases,
                 'chunk_strategy' => [
                     'separator' => '\n\n',
                     'max_tokens' => 800,
@@ -153,12 +153,13 @@ class KnowledgeTest extends TestCase
         $this->assertEquals(0, $response->json('code'));
     }
 
-    public function test_update_method(): void
+    public function test_update(): void
     {
         // 调用update方法
         $documentId = '123456789';
-        $name = 'updated_test.pdf';
-        $response = $this->knowledge->update($this->datasetId, $documentId, $name);
+        $response = $this->knowledge->update($this->datasetId, [
+            'name' => 'updated_test.pdf',
+        ]);
 
         // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);
@@ -166,10 +167,10 @@ class KnowledgeTest extends TestCase
 
         // 测试带有额外参数的情况
         $response = $this->knowledge->update(
-            $this->datasetId,
             $documentId,
-            $name,
+
             [
+                'name' => 'updated_test.pdf',
                 'chunk_strategy' => [
                     'separator' => '\n\n',
                     'max_tokens' => 1000,
@@ -179,7 +180,7 @@ class KnowledgeTest extends TestCase
         $this->assertEquals(0, $response->json('code'));
     }
 
-    public function test_list_method(): void
+    public function test_list(): void
     {
         // 调用list方法
         $response = $this->knowledge->list($this->datasetId);
@@ -200,18 +201,17 @@ class KnowledgeTest extends TestCase
         $this->assertEquals(0, $response->json('code'));
     }
 
-    public function test_delete_method(): void
+    public function test_delete(): void
     {
         // 调用delete方法
-        $documentIds = ['123456789', '987654321'];
-        $response = $this->knowledge->delete($this->datasetId, $documentIds);
+        $response = $this->knowledge->delete(['123456789', '987654321']);
 
         // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(0, $response->json('code'));
     }
 
-    public function test_process_method(): void
+    public function test_process(): void
     {
         // 调用process方法
         $documentIds = ['123456789'];
@@ -222,7 +222,7 @@ class KnowledgeTest extends TestCase
         $this->assertEquals(0, $response->json('code'));
     }
 
-    public function test_image_caption_method(): void
+    public function test_image_caption(): void
     {
         // 调用imageCaption方法
         $imageId = '123456789';
@@ -234,7 +234,7 @@ class KnowledgeTest extends TestCase
         $this->assertEquals(0, $response->json('code'));
     }
 
-    public function test_images_method(): void
+    public function test_images(): void
     {
         // 调用images方法
         $response = $this->knowledge->images($this->datasetId);

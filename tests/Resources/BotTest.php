@@ -5,13 +5,13 @@ namespace Simonetoo\Coze\Tests\Resources;
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
 use Simonetoo\Coze\Http\JsonResponse;
-use Simonetoo\Coze\Resources\Bots;
+use Simonetoo\Coze\Resources\Bot;
 
-class BotsTest extends TestCase
+class BotTest extends TestCase
 {
     private Coze $coze;
 
-    private Bots $bots;
+    private Bot $bots;
 
     private string $spaceId = '7484524201249194023';
 
@@ -20,7 +20,7 @@ class BotsTest extends TestCase
     protected function setUp(): void
     {
         $this->coze = Coze::fake();
-        $this->bots = $this->coze->bots();
+        $this->bots = $this->coze->bot();
     }
 
     public function test_list_method(): void

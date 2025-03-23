@@ -5,24 +5,22 @@ namespace Simonetoo\Coze\Tests\Resources;
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
 use Simonetoo\Coze\Http\JsonResponse;
-use Simonetoo\Coze\Resources\Datasets;
+use Simonetoo\Coze\Resources\Dataset;
 
-class DatasetsTest extends TestCase
+class DatasetTest extends TestCase
 {
     private Coze $coze;
 
-    private Datasets $datasets;
+    private Dataset $datasets;
 
     private string $spaceId = '7484524201249194023';
 
     private string $datasetId = '7484881587176734755';
 
-    private string $documentId = '7484881587176734800';
-
     protected function setUp(): void
     {
         $this->coze = Coze::fake();
-        $this->datasets = $this->coze->datasets();
+        $this->datasets = $this->coze->dataset();
     }
 
     public function test_list(): void
@@ -74,10 +72,9 @@ class DatasetsTest extends TestCase
 
         // 调用update方法
         $payload = [
-            'name' => 'Updated Dataset Name',
             'description' => 'Updated dataset description',
         ];
-        $response = $this->datasets->update($this->datasetId, $payload);
+        $response = $this->datasets->update($this->datasetId, 'Updated Dataset Name', $payload);
 
         // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Simon<shihuiqian@xvii.pro>
+ * @author Simonetoo<simonetoo@xvii.pro>
  */
 
 require_once __DIR__.'/../../vendor/autoload.php';
@@ -12,7 +12,7 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-$datasetId = '7484881587176734755';
+$datasetId = '7484952582571114536';
 
 echo "查看知识库图片列表...\n";
 

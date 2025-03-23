@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Simon<shihuiqian@xvii.pro>
+ * @author Simonetoo<simonetoo@xvii.pro>
  */
 
 require_once __DIR__.'/../../vendor/autoload.php';
@@ -9,11 +9,10 @@ require_once __DIR__.'/../../vendor/autoload.php';
 use Simonetoo\Coze\Coze;
 
 $client = new Coze([
-    'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
-    'base_uri' => 'https://api.coze.com', // 明确指定使用国际站域名
+    'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL'
 ]);
 
-$datasetId = '7484881587176734755';
+$datasetId = '7484952582571114536';
 
 echo "查看知识库文件列表...\n";
 

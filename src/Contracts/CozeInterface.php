@@ -3,9 +3,9 @@
 namespace Simonetoo\Coze\Contracts;
 
 use Simonetoo\Coze\Http\HttpClient;
-use Simonetoo\Coze\Resources\Bots;
-use Simonetoo\Coze\Resources\Datasets;
-use Simonetoo\Coze\Resources\Files;
+use Simonetoo\Coze\Resources\Bot;
+use Simonetoo\Coze\Resources\Dataset;
+use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
 
 interface CozeInterface
@@ -18,17 +18,17 @@ interface CozeInterface
     /**
      * 获取Bots API资源
      */
-    public function bots(): Bots;
+    public function bot(): Bot;
 
     /**
      * 获取Files API资源
      */
-    public function files(): Files;
+    public function file(): File;
 
     /**
      * 获取Datasets API资源（知识库）
      */
-    public function datasets(): Datasets;
+    public function dataset(): Dataset;
 
     /**
      * 获取知识库资源

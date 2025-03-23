@@ -5,13 +5,13 @@ namespace Simonetoo\Coze\Tests\Resources;
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
 use Simonetoo\Coze\Http\JsonResponse;
-use Simonetoo\Coze\Resources\Files;
+use Simonetoo\Coze\Resources\File;
 
-class FilesTest extends TestCase
+class FileTest extends TestCase
 {
     private Coze $coze;
 
-    private Files $files;
+    private File $files;
 
     private string $fileId = '7484881587176734755';
 
@@ -20,7 +20,7 @@ class FilesTest extends TestCase
     protected function setUp(): void
     {
         $this->coze = Coze::fake();
-        $this->files = $this->coze->files();
+        $this->files = $this->coze->file();
     }
 
     public function test_upload_method(): void

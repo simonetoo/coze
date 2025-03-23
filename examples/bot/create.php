@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Simon<shihuiqian@xvii.pro>
+ * @author Simonetoo<simonetoo@xvii.pro>
  */
 
 require_once __DIR__.'/../../vendor/autoload.php';
@@ -16,10 +16,9 @@ $spaceId = '7484524201249194023';
 
 echo "创建新机器人...\n";
 
-$response = $client->bots()->create(
+$response = $client->bot()->create(
     '7484524201249194023',
-    '测试机器人_'.date('YmdHis'),
-    '这是一个通过API创建的测试机器人，创建时间: '.date('Y-m-d H:i:s')
+    '测试机器人_'.date('YmdHis')
 );
 
 echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

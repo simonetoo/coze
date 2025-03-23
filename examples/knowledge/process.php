@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Simon<shihuiqian@xvii.pro>
+ * @author Simonetoo<simonetoo@xvii.pro>
  */
 
 require_once __DIR__.'/../../vendor/autoload.php';
