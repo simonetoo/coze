@@ -13,8 +13,6 @@ class Knowledge extends Resource
     /**
      * 创建知识库文件
      *
-     * @return JsonResponse
-     *
      * @see zh:https://www.coze.cn/open/docs/developer_guides/create_knowledge_files
      * @see en:https://www.coze.com/open/docs/developer_guides/create_knowledge_files
      */
