@@ -6,7 +6,6 @@ use Closure;
 
 class Utils
 {
-
     public static function dataGet(array $target, string|array|null $key = null, mixed $default = null): mixed
     {
         if (is_null($key)) {

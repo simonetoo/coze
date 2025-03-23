@@ -12,7 +12,15 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-echo "获取机器人列表...\n";
-$response = $client->bots()->list('7484524201249194023');
+$botId = '7484523878849822754';
+
+echo "更新机器人...\n";
+$response = $client->bots()->update(
+    $botId,
+    '更新后的机器人_'.date('YmdHis'),
+    [
+        'description' => '这是一个更新后的描述，更新时间: '.date('Y-m-d H:i:s'),
+    ]
+);
 
 print json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

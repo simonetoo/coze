@@ -2,24 +2,20 @@
 
 namespace Simonetoo\Coze\Exceptions;
 
+use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 class NotFoundException extends ApiException
 {
     /**
-     * 初始化资源未找到异常
-     *
-     * @param  string  $message  异常消息
-     * @param  int  $code  异常代码
-     * @param  array  $errorData  错误数据
-     * @param  Throwable|null  $previous  上一个异常
+     * {@inheritdoc}
      */
     public function __construct(
         string $message = 'Resource Not Found',
         int $code = 404,
-        array $errorData = [],
+        ?ResponseInterface $response = null,
         ?Throwable $previous = null
     ) {
-        parent::__construct($message, $code, $errorData, $previous);
+        parent::__construct($message, $code, $response, $previous);
     }
 }

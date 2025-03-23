@@ -9,12 +9,11 @@ class JsonResponse extends Response
     protected array $decodedJson = [];
 
     /**
-     * 将响应体解析为JSON
+     * 获取Json数据
      *
-     * @template T of mixed
      * @param  string|array|null  $key  要获取的键，使用点符号访问嵌套数组，null返回整个数组
-     * @param  T|null  $default  如果键不存在，返回的默认值
-     * @return T 解析后的JSON数据
+     * @param  mixed  $default  如果键不存在，返回的默认值
+     * @return mixed 解析后的JSON数据
      */
     public function json(string|array|null $key = null, mixed $default = null): mixed
     {
@@ -28,5 +27,34 @@ class JsonResponse extends Response
         }
 
         return Utils::dataGet($this->decodedJson, $key, $default);
+    }
+
+    /**
+     * @param  string|array|null  $key
+     * @param  mixed|null  $default
+     * @return mixed
+     */
+    public function data(string|array|null $key = null, mixed $default = null): mixed
+    {
+        $data = $this->json('data', []);
+        return Utils::dataGet($data, $key, $default);
+    }
+
+    /**
+     * @return int
+     */
+    public function code(): int
+    {
+        return $this->data('code');
+    }
+
+    public function message(): string
+    {
+        return $this->json('msg', '');
+    }
+
+    public function isSuccess(): bool
+    {
+        return $this->code() === 0;
     }
 }

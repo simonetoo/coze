@@ -143,7 +143,7 @@ class Coze implements CozeInterface
 
         // 尝试匹配模拟的URL
         foreach ($this->fakeCallbacks as $url => $callback) {
-            if (preg_match('#' . preg_quote($url, '#') . '#', $path)) {
+            if (preg_match('#'.preg_quote($url, '#').'#', $path)) {
                 $response = $callback($request, $options);
                 if ($response instanceof Response) {
                     return $response->getPsrResponse();
@@ -162,7 +162,7 @@ class Coze implements CozeInterface
         $path = $request->getUri()->getPath();
 
         foreach ($this->fakeCallbacks as $url => $callback) {
-            if (preg_match('#' . preg_quote($url, '#') . '#', $path)) {
+            if (preg_match('#'.preg_quote($url, '#').'#', $path)) {
                 $response = $callback($request, $options);
                 if ($response instanceof Response) {
                     return $response;

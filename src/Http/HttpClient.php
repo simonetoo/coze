@@ -99,30 +99,28 @@ class HttpClient implements HttpClientInterface
             $statusCode = $response ? $response->getStatusCode() : 0;
             $body = (string) $response?->getBody();
 
-            $errorData = [];
             $message = $e->getMessage();
 
             if (! empty($body)) {
                 $decodedData = json_decode($body, true);
                 if (is_array($decodedData)) {
-                    $errorData = $decodedData;
-                    $message = $errorData['error']['message'] ?? $message;
+                    $message = $decodedData['error']['message'] ?? $message;
                 }
             }
 
             throw match ($statusCode) {
-                400 => new BadRequestException($message, $statusCode, $errorData, $e),
-                401 => new AuthenticationException($message, $statusCode, $errorData, $e),
-                403 => new PermissionDeniedException($message, $statusCode, $errorData, $e),
-                404 => new NotFoundException($message, $statusCode, $errorData, $e),
-                408 => new TimeoutException($message, $statusCode, $errorData, $e),
-                429 => new RateLimitException($message, $statusCode, $errorData, $e),
-                500 => new InternalServerException($message, $statusCode, $errorData, $e),
-                502, 503, 504 => new GatewayException($message, $statusCode, $errorData, $e),
-                default => new ApiException($message, $statusCode, $errorData, $e),
+                400 => new BadRequestException($message, $statusCode, $response, $e),
+                401 => new AuthenticationException($message, $statusCode, $response, $e),
+                403 => new PermissionDeniedException($message, $statusCode, $response, $e),
+                404 => new NotFoundException($message, $statusCode, $response, $e),
+                408 => new TimeoutException($message, $statusCode, $response, $e),
+                429 => new RateLimitException($message, $statusCode, $response, $e),
+                500 => new InternalServerException($message, $statusCode, $response, $e),
+                502, 503, 504 => new GatewayException($message, $statusCode, $response, $e),
+                default => new ApiException($message, $statusCode, $response, $e),
             };
         } catch (GuzzleException $e) {
-            throw new ApiException($e->getMessage(), $e->getCode(), [], $e);
+            throw new ApiException($e->getMessage(), $e->getCode(), null, $e);
         }
     }
 }
