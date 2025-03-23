@@ -19,6 +19,7 @@ class Bots extends Resource
      * @see https://www.coze.com/open/docs/developer_guides/published_bots_list
      */
     public function list(string $spaceId, array $payload = []): JsonResponse
+    public function list(string $spaceId, array $payload = []): JsonResponse
     {
         $payload['space_id'] = $spaceId;
         
