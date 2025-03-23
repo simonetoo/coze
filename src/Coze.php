@@ -58,7 +58,7 @@ class Coze implements CozeInterface
     {
         return $this->getResource(Files::class);
     }
-    
+
     /**
      * {@inheritdoc}
      */

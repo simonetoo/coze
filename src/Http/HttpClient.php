@@ -29,7 +29,7 @@ class HttpClient implements HttpClientInterface
         }
         $this->client = new GuzzleClient([
             ...$options,
-            'base_uri' => $options['base_uri'] ?? 'https://api.coze.com',
+            'base_uri' => $options['base_uri'] ?? 'https://api.coze.cn',
             'headers' => $headers,
         ]);
     }

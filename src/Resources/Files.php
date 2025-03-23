@@ -10,30 +10,29 @@ class Files extends Resource
     /**
      * 上传文件
      *
-     * @param string $filePath 文件路径
-     * @param array $payload 其他可选参数
-     * @return JsonResponse
+     * @param  string  $filePath  文件路径
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/upload_files
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/upload_files
+     * @see en:https://www.coze.com/open/docs/developer_guides/upload_files
      */
-    public function upload(string $filePath, array $payload = []): JsonResponse
+    public function upload(string $filePath): JsonResponse
     {
-        $payload['file'] = $this->client->prepareFile($filePath);
-        
-        return $this->client->postMultipart('/v1/files', $payload);
+        return $this->client->post('/v1/files', [
+            'body' => fopen($filePath, 'r'),
+        ]);
     }
 
     /**
      * 获取文件详情
      *
-     * @param string $fileId 文件ID
-     * @return JsonResponse
+     * @param  string  $fileId  文件ID
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/retrieve_files
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/retrieve_files
+     * @see en:https://www.coze.com/open/docs/developer_guides/retrieve_files
      */
     public function retrieve(string $fileId): JsonResponse
     {

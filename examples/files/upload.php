@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Simon<shihuiqian@xvii.pro>
  */
@@ -18,10 +19,7 @@ file_put_contents($testFilePath, '这是一个测试文件，用于演示Files A
 
 try {
     $response = $client->files()->upload($testFilePath);
-    print json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 } finally {
     unlink($testFilePath);
 }
-
-
-

@@ -23,7 +23,7 @@ interface CozeInterface
      * 获取Files API资源
      */
     public function files(): Files;
-    
+
     /**
      * 获取Datasets API资源（知识库）
      */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Simon<shihuiqian@xvii.pro>
  */
@@ -15,4 +16,4 @@ echo "文件详情...\n";
 
 $response = $client->files()->retrieve('7484881587176734755');
 
-print json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

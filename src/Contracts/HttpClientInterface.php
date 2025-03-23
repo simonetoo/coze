@@ -14,7 +14,6 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $query  查询参数
      * @param  array  $options  请求选项
-     * @return JsonResponse
      *
      * @throws ApiException
      */
@@ -25,7 +24,6 @@ interface HttpClientInterface
      *
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
-     * @return JsonResponse
      *
      * @throws ApiException
      */
@@ -37,7 +35,6 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $data  请求数据
      * @param  array  $options  请求选项
-     * @return JsonResponse
      *
      * @throws ApiException
      */
@@ -48,7 +45,6 @@ interface HttpClientInterface
      *
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
-     * @return JsonResponse
      *
      * @throws ApiException
      */
@@ -60,7 +56,6 @@ interface HttpClientInterface
      * @param  string  $path  API路径
      * @param  array  $data  请求数据
      * @param  array  $options  请求选项
-     * @return JsonResponse
      *
      * @throws ApiException
      */
@@ -72,7 +67,6 @@ interface HttpClientInterface
      * @param  string  $method  请求方法
      * @param  string  $path  API路径
      * @param  array  $options  请求选项
-     * @return StreamResponse
      *
      * @throws ApiException
      */

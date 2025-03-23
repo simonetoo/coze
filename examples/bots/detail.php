@@ -1,8 +1,8 @@
 <?php
+
 /**
  * @author Simon<shihuiqian@xvii.pro>
  */
-
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
@@ -15,5 +15,4 @@ $client = new Coze([
 echo "获取机器人详情...\n";
 $response = $client->bots()->get('7484523878849822754');
 
-
-print json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

@@ -1,8 +1,8 @@
 <?php
+
 /**
  * @author Simon<shihuiqian@xvii.pro>
  */
-
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
@@ -18,9 +18,9 @@ echo "更新机器人...\n";
 $response = $client->bots()->update(
     $botId,
     [
-        'name' =>   '更新后的机器人_'.date('YmdHis'),
+        'name' => '更新后的机器人_'.date('YmdHis'),
         'description' => '这是一个更新后的描述，更新时间: '.date('Y-m-d H:i:s'),
     ]
 );
 
-print json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

@@ -10,15 +10,15 @@ class Datasets extends Resource
     /**
      * 创建知识库
      *
-     * @param string $name 知识库名称
-     * @param string $spaceId 空间ID
-     * @param int $formatType 格式类型
-     * @param array $payload 其他可选参数
-     * @return JsonResponse
+     * @param  string  $name  知识库名称
+     * @param  string  $spaceId  空间ID
+     * @param  int  $formatType  格式类型
+     * @param  array  $payload  其他可选参数
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/create_dataset
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/create_dataset
+     * @see en:https://www.coze.com/open/docs/developer_guides/create_dataset
      */
     public function create(
         string $name,
@@ -36,26 +36,26 @@ class Datasets extends Resource
     /**
      * 获取知识库列表
      *
-     * @param string $spaceId 空间ID
-     * @param array $payload 其他可选参数 (name, format_type, page_num, page_size)
-     * @return JsonResponse
+     * @param  string  $spaceId  空间ID
+     * @param  array  $payload  其他可选参数 (name, format_type, page_num, page_size)
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/list_dataset
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/list_dataset
+     * @see en:https://www.coze.com/open/docs/developer_guides/list_dataset
      */
     public function list(
         string $spaceId,
         array $payload = []
     ): JsonResponse {
         $payload['space_id'] = $spaceId;
-        
+
         // 设置默认分页参数
-        if (!isset($payload['page_num'])) {
+        if (! isset($payload['page_num'])) {
             $payload['page_num'] = 1;
         }
-        
-        if (!isset($payload['page_size'])) {
+
+        if (! isset($payload['page_size'])) {
             $payload['page_size'] = 10;
         }
 
@@ -65,13 +65,13 @@ class Datasets extends Resource
     /**
      * 修改知识库信息
      *
-     * @param string $datasetId 知识库ID
-     * @param array $payload 其他可选参数 (name, description)
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
+     * @param  array  $payload  其他可选参数 (name, description)
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/update_dataset
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/update_dataset
+     * @see en:https://www.coze.com/open/docs/developer_guides/update_dataset
      */
     public function update(
         string $datasetId,
@@ -83,12 +83,12 @@ class Datasets extends Resource
     /**
      * 删除知识库
      *
-     * @param string $datasetId 知识库ID
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/delete_dataset
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/delete_dataset
+     * @see en:https://www.coze.com/open/docs/developer_guides/delete_dataset
      */
     public function delete(string $datasetId): JsonResponse
     {
@@ -98,13 +98,13 @@ class Datasets extends Resource
     /**
      * 上传文件到知识库
      *
-     * @param string $datasetId 知识库ID
-     * @param array $documents 文档信息数组
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
+     * @param  array  $documents  文档信息数组
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/upload_dataset_document
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/upload_dataset_document
+     * @see en:https://www.coze.com/open/docs/developer_guides/upload_dataset_document
      */
     public function uploadDocuments(
         string $datasetId,
@@ -120,14 +120,14 @@ class Datasets extends Resource
     /**
      * 修改知识库文件
      *
-     * @param string $datasetId 知识库ID
-     * @param string $documentId 文档ID
-     * @param string $documentName 文档名称
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
+     * @param  string  $documentId  文档ID
+     * @param  string  $documentName  文档名称
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/update_dataset_document
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/update_dataset_document
+     * @see en:https://www.coze.com/open/docs/developer_guides/update_dataset_document
      */
     public function updateDocument(
         string $datasetId,
@@ -144,24 +144,24 @@ class Datasets extends Resource
     /**
      * 获取知识库文件列表
      *
-     * @param string $datasetId 知识库ID
-     * @param array $payload 其他可选参数 (page, page_size)
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
+     * @param  array  $payload  其他可选参数 (page, page_size)
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/list_dataset_document
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/list_dataset_document
+     * @see en:https://www.coze.com/open/docs/developer_guides/list_dataset_document
      */
     public function listDocuments(
         string $datasetId,
         array $payload = []
     ): JsonResponse {
         // 设置默认分页参数
-        if (!isset($payload['page'])) {
+        if (! isset($payload['page'])) {
             $payload['page'] = 1;
         }
-        
-        if (!isset($payload['page_size'])) {
+
+        if (! isset($payload['page_size'])) {
             $payload['page_size'] = 10;
         }
 
@@ -171,13 +171,13 @@ class Datasets extends Resource
     /**
      * 检查文件上传进度
      *
-     * @param string $datasetId 知识库ID
-     * @param array $documentIds 文档ID数组
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
+     * @param  array  $documentIds  文档ID数组
      *
      * @throws ApiException
      *
-     * @see https://www.coze.com/open/docs/developer_guides/get_dataset_document_process
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/get_dataset_document_process
+     * @see en:https://www.coze.com/open/docs/developer_guides/get_dataset_document_process
      */
     public function checkDocumentProcess(
         string $datasetId,
@@ -193,8 +193,7 @@ class Datasets extends Resource
     /**
      * 获取知识库图片列表
      *
-     * @param string $datasetId 知识库ID
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
      *
      * @throws ApiException
      */
@@ -206,10 +205,9 @@ class Datasets extends Resource
     /**
      * 更新图片描述
      *
-     * @param string $datasetId 知识库ID
-     * @param string $documentId 文档ID
-     * @param string $caption 图片描述
-     * @return JsonResponse
+     * @param  string  $datasetId  知识库ID
+     * @param  string  $documentId  文档ID
+     * @param  string  $caption  图片描述
      *
      * @throws ApiException
      */

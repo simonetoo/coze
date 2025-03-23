@@ -29,20 +29,13 @@ class JsonResponse extends Response
         return Utils::dataGet($this->decodedJson, $key, $default);
     }
 
-    /**
-     * @param  string|array|null  $key
-     * @param  mixed|null  $default
-     * @return mixed
-     */
     public function data(string|array|null $key = null, mixed $default = null): mixed
     {
         $data = $this->json('data', []);
+
         return Utils::dataGet($data, $key, $default);
     }
 
-    /**
-     * @return int
-     */
     public function code(): int
     {
         return $this->data('code');
@@ -56,5 +49,10 @@ class JsonResponse extends Response
     public function isSuccess(): bool
     {
         return $this->code() === 0;
+    }
+
+    public function isFailure(): bool
+    {
+        return ! $this->isSuccess();
     }
 }
