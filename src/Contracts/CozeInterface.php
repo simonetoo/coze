@@ -6,6 +6,7 @@ use Simonetoo\Coze\Http\HttpClient;
 use Simonetoo\Coze\Resources\Bots;
 use Simonetoo\Coze\Resources\Datasets;
 use Simonetoo\Coze\Resources\Files;
+use Simonetoo\Coze\Resources\Knowledge;
 
 interface CozeInterface
 {
@@ -28,4 +29,9 @@ interface CozeInterface
      * 获取Datasets API资源（知识库）
      */
     public function datasets(): Datasets;
+
+    /**
+     * 获取知识库资源
+     */
+    public function knowledge(): Knowledge;
 }

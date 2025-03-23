@@ -15,6 +15,7 @@ use Simonetoo\Coze\Http\StreamResponse;
 use Simonetoo\Coze\Resources\Bots;
 use Simonetoo\Coze\Resources\Datasets;
 use Simonetoo\Coze\Resources\Files;
+use Simonetoo\Coze\Resources\Knowledge;
 use Simonetoo\Coze\Resources\Resource;
 
 class Coze implements CozeInterface
@@ -65,6 +66,14 @@ class Coze implements CozeInterface
     public function datasets(): Datasets
     {
         return $this->getResource(Datasets::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function knowledge(): Knowledge
+    {
+        return $this->getResource(Knowledge::class);
     }
 
     /**
