@@ -19,15 +19,4 @@ echo "查看知识库文件列表...\n";
 // 基本调用
 $response = $client->knowledge()->list($datasetId);
 
-echo "基本列表查询结果：\n";
-echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-
-// 带分页和筛选条件的调用
-$response = $client->knowledge()->list($datasetId, [
-    'page' => 1,
-    'page_size' => 10,
-    'status' => 'processed', // 可选值：processing, processed, failed
-]);
-
-echo "\n\n带分页和筛选的查询结果：\n";
 echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

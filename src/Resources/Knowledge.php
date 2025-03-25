@@ -80,6 +80,10 @@ class Knowledge extends Resource
         if (! is_array($documentIds)) {
             $documentIds = [$documentIds];
         }
+        foreach ($documentIds as &$documentId) {
+            // 使用字符串会导致400 Bad Request. 暂时(int)处理一下
+            $documentId = (int) $documentId;
+        }
         return $this->client->postJson('/open_api/knowledge/document/delete', [
             'document_ids' => $documentIds,
         ]);
