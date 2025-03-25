@@ -10,7 +10,7 @@ use Simonetoo\Coze\Coze;
 use Simonetoo\Coze\Exceptions\CozeException;
 
 $client = new Coze([
-    'token' => 'your-token',
+    'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
 $datasetId = '7484952582571114536';

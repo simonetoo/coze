@@ -9,11 +9,11 @@ require_once __DIR__.'/../../vendor/autoload.php';
 use Simonetoo\Coze\Coze;
 
 $client = new Coze([
-    'token' => 'your-token',
+    'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
 $datasetId = '7484881587176734755';
-$documentId = '7485659086605746000';
+$documentId = '7485662116432134183';
 
 // 查询上传进度
 $response = $client->knowledge()->process($datasetId, $documentId);
