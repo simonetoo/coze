@@ -12,7 +12,6 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-
 $response = $client->knowledge()->update(
     '7484952582571114536',
     [

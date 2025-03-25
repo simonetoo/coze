@@ -13,10 +13,12 @@ use Simonetoo\Coze\Http\JsonResponse;
 use Simonetoo\Coze\Http\Response;
 use Simonetoo\Coze\Http\StreamResponse;
 use Simonetoo\Coze\Resources\Bot;
+use Simonetoo\Coze\Resources\Conversation;
 use Simonetoo\Coze\Resources\Dataset;
 use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
 use Simonetoo\Coze\Resources\Resource;
+use Simonetoo\Coze\Resources\Workspace;
 
 class Coze implements CozeInterface
 {
@@ -74,6 +76,22 @@ class Coze implements CozeInterface
     public function knowledge(): Knowledge
     {
         return $this->getResource(Knowledge::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function workspace(): Workspace
+    {
+        return $this->getResource(Workspace::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function conversation(): Conversation
+    {
+        return $this->getResource(Conversation::class);
     }
 
     /**
