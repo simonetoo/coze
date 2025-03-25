@@ -7,12 +7,13 @@
 require_once __DIR__.'/../../vendor/autoload.php';
 
 use Simonetoo\Coze\Coze;
+use Simonetoo\Coze\Exceptions\CozeException;
 
 $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-$datasetId = '7484881587176734755';
+$datasetId = '7484952582571114536';
 
 echo "创建知识库文件...\n";
 
@@ -37,11 +38,16 @@ $chunkStrategy = [
     'remove_urls_emails' => false,
     'chunk_type' => 1,
 ];
+try{
+    $response = $client->knowledge()->create(
+        $datasetId,
+        [
+            'document_bases' => $documentBases,
+            'chunk_strategy' => $chunkStrategy,
+        ]
+    );
 
-$response = $client->knowledge()->create(
-    $datasetId,
-    $documentBases,
-    ['chunk_strategy' => $chunkStrategy]
-);
-
-echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+}catch (\Simonetoo\Coze\Exceptions\ApiException $e){
+    var_dump($e->getResponse()->getBody());
+}

@@ -21,4 +21,9 @@ class ApiException extends CozeException
         parent::__construct($message, $code, $previous);
         $this->response = $response;
     }
+
+    public function getResponse(): ?ResponseInterface
+    {
+        return $this->response;
+    }
 }

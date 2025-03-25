@@ -40,6 +40,6 @@ if (strtolower($confirmation) !== 'y') {
 }
 
 // 执行删除操作
-$response = $client->knowledge()->delete($datasetId, [$documentId]);
+$response = $client->knowledge()->delete($documentId);
 
 echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

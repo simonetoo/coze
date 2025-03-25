@@ -22,7 +22,7 @@ class JsonResponse extends Response
             if (empty($body)) {
                 $this->decodedJson = [];
             } else {
-                $this->decodedJson = json_decode($body, true);
+                $this->decodedJson = json_decode($body, true, 512, JSON_BIGINT_AS_STRING);
             }
         }
 
