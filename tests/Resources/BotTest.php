@@ -23,7 +23,7 @@ class BotTest extends TestCase
         $this->bots = $this->coze->bot();
     }
 
-    public function test_list_method(): void
+    public function test_list(): void
     {
         // 模拟响应数据
         $responseData = [
@@ -56,7 +56,7 @@ class BotTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_get_method(): void
+    public function test_get(): void
     {
         // 模拟响应数据
         $responseData = [
@@ -78,7 +78,7 @@ class BotTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_create_method(): void
+    public function test_create(): void
     {
         // 模拟响应数据
         $responseData = [
@@ -95,7 +95,9 @@ class BotTest extends TestCase
         // 调用create方法
         $name = 'New Test Bot';
         $description = 'This is a test bot created via API';
-        $response = $this->bots->create($this->spaceId, $name, $description);
+        $response = $this->bots->create($this->spaceId, $name, [
+            'description' => $description,
+        ]);
 
         // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);
@@ -106,13 +108,12 @@ class BotTest extends TestCase
         $response = $this->bots->create(
             $this->spaceId,
             $name,
-            $description,
-            ['avatar' => 'https://example.com/avatar.png']
+            ['description' => $description, 'avatar' => 'https://example.com/avatar.png']
         );
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_update_method(): void
+    public function test_update(): void
     {
         // 模拟响应数据
         $responseData = [

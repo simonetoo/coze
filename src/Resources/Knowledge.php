@@ -27,6 +27,7 @@ class Knowledge extends Resource
         if (! isset($payload['format_type'])) {
             $payload['format_type'] = 2;
         }
+
         return $this->client->postJson('/open_api/knowledge/document/create', $payload);
     }
 
@@ -72,6 +73,7 @@ class Knowledge extends Resource
      * @param  array|string  $documentIds  要删除的文档ID数组
      *
      * @throws ApiException
+     *
      * @see zh:https://www.coze.cn/open/docs/developer_guides/delete_knowdge_files
      * @see en:https://www.coze.com/open/docs/developer_guides/delete_knowledge_files
      */
@@ -84,6 +86,7 @@ class Knowledge extends Resource
             // 使用字符串会导致400 Bad Request. 暂时(int)处理一下
             $documentId = (int) $documentId;
         }
+
         return $this->client->postJson('/open_api/knowledge/document/delete', [
             'document_ids' => $documentIds,
         ]);
@@ -95,8 +98,8 @@ class Knowledge extends Resource
      * @param  string  $datasetId  知识库ID
      * @param  array|string[]  $documentIds  文档ID数组
      *
-     * @return JsonResponse
      * @throws ApiException
+     *
      * @see en:https://www.coze.com/open/docs/developer_guides/7v3czmpi
      * @see zh:https://www.coze.cn/open/docs/developer_guides/get_dataset_progress
      */
@@ -105,6 +108,7 @@ class Knowledge extends Resource
         if (! is_array($documentIds)) {
             $documentIds = [$documentIds];
         }
+
         return $this->client->postJson("/v1/datasets/{$datasetId}/process", [
             'document_ids' => $documentIds,
         ]);
