@@ -277,5 +277,8 @@ try {
 }
 ```
 
+## 贡献指南
+[查看贡献指南](CONTRIBUTING.md)
+
 ## 许可证
 [MIT LICENSE](LICENSE)
