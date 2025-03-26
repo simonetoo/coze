@@ -10,6 +10,7 @@ use Simonetoo\Coze\Resources\Dataset;
 use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
 use Simonetoo\Coze\Resources\Message;
+use Simonetoo\Coze\Resources\Workflow;
 use Simonetoo\Coze\Resources\Workspace;
 
 interface CozeInterface
@@ -58,7 +59,6 @@ interface CozeInterface
      * 获取消息资源
      */
     public function message(): Message;
-
 
     /**
      * 获取Workflow API资源

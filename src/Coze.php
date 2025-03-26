@@ -20,6 +20,7 @@ use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
 use Simonetoo\Coze\Resources\Message;
 use Simonetoo\Coze\Resources\Resource;
+use Simonetoo\Coze\Resources\Workflow;
 use Simonetoo\Coze\Resources\Workspace;
 
 class Coze implements CozeInterface
@@ -110,6 +111,11 @@ class Coze implements CozeInterface
     public function message(): Message
     {
         return $this->getResource(Message::class);
+    }
+
+    public function workflow(): Workflow
+    {
+        return $this->getResource(Workflow::class);
     }
 
     /**

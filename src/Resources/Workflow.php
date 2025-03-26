@@ -23,7 +23,14 @@ class Workflow extends Resource
     {
         $payload['workflow_id'] = $workflowId;
 
-        return $this->client->postJson('/v1/workflow/run', $payload);
+        return $this->client->postJson('/v1/workflow/run', $payload)->transform(function ($body) {
+            $decoded = json_decode($body, true, JSON_BIGINT_AS_STRING);
+            if (isset($decoded['data']) && is_string($decoded['data'])) {
+                $decoded['data'] = json_decode($decoded['data'], true, JSON_BIGINT_AS_STRING);
+            }
+
+            return $decoded;
+        });
     }
 
     /**
@@ -37,7 +44,7 @@ class Workflow extends Resource
      * @see zh:https://www.coze.cn/open/docs/developer_guides/workflow_stream_run
      * @see en:https://www.coze.com/open/docs/developer_guides/workflow_stream_run
      */
-    public function streamRun(string $workflowId, array $payload = []): StreamResponse
+    public function stream(string $workflowId, array $payload = []): StreamResponse
     {
         $payload['workflow_id'] = $workflowId;
 
@@ -68,7 +75,6 @@ class Workflow extends Resource
      * 执行聊天工作流
      *
      * @param  string  $workflowId  聊天工作流ID
-     * @param  array  $messages  消息列表
      * @param  array  $payload  其他可选参数
      *
      * @throws ApiException
@@ -76,11 +82,26 @@ class Workflow extends Resource
      * @see zh:https://www.coze.cn/open/docs/developer_guides/workflow_chat
      * @see en:https://www.coze.com/open/docs/developer_guides/workflow_chat
      */
-    public function chat(string $workflowId, array $messages, array $payload = []): StreamResponse
+    public function chat(string $workflowId, array $payload = []): StreamResponse
     {
         $payload['workflow_id'] = $workflowId;
-        $payload['messages'] = $messages;
 
-        return $this->client->stream('POST', '/v1/workflow/chat', ['json' => $payload]);
+        return $this->client->stream('POST', '/v1/workflows/chat', ['json' => $payload]);
+    }
+
+    /**
+     * 查询工作流异步执行结果
+     *
+     * @param  string  $workflowId  工作流ID
+     * @param  string  $executeId  工作流执行ID
+     *
+     * @throws ApiException
+     *
+     * @see zh:https://www.coze.cn/open/docs/developer_guides/workflow_history
+     * @see en:https://www.coze.com/open/docs/developer_guides/workflow_history
+     */
+    public function history(string $workflowId, string $executeId): JsonResponse
+    {
+        return $this->client->get("/v1/workflows/{$workflowId}/run_histories/{$executeId}");
     }
 }

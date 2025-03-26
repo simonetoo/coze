@@ -2,11 +2,14 @@
 
 namespace Simonetoo\Coze\Http;
 
+use Closure;
 use Simonetoo\Coze\Concerns\Utils;
 
 class JsonResponse extends Response
 {
     protected array $decodedJson = [];
+
+    protected ?Closure $transformer;
 
     /**
      * 获取Json数据
@@ -21,6 +24,8 @@ class JsonResponse extends Response
             $body = (string) $this->getBody();
             if (empty($body)) {
                 $this->decodedJson = [];
+            } elseif (isset($this->transformer)) {
+                $this->decodedJson = call_user_func($this->transformer, $body);
             } else {
                 $this->decodedJson = json_decode($body, true, 512, JSON_BIGINT_AS_STRING);
             }
@@ -32,8 +37,11 @@ class JsonResponse extends Response
     public function data(string|array|null $key = null, mixed $default = null): mixed
     {
         $data = $this->json('data', []);
+        if (is_array($data)) {
+            return Utils::dataGet($data, $key, $default);
+        }
 
-        return Utils::dataGet($data, $key, $default);
+        return is_null($key) ? $data : $default;
     }
 
     public function code(): int
@@ -54,5 +62,12 @@ class JsonResponse extends Response
     public function isFailure(): bool
     {
         return ! $this->isSuccess();
+    }
+
+    public function transform(Closure $transformer): JsonResponse
+    {
+        $this->transformer = $transformer;
+
+        return $this;
     }
 }

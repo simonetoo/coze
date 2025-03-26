@@ -24,7 +24,7 @@ class WorkflowTest extends TestCase
         $this->workflow = $this->coze->workflow();
     }
 
-    public function test_run_method(): void
+    public function test_run(): void
     {
         // 模拟响应数据
         $responseData = [
@@ -54,7 +54,7 @@ class WorkflowTest extends TestCase
         $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_stream_run_method(): void
+    public function test_stream(): void
     {
         // 模拟响应数据
         $chunks = [
@@ -72,7 +72,7 @@ class WorkflowTest extends TestCase
         $this->coze->mock('v1/workflow/stream_run', $streamResponse);
 
         // 调用streamRun方法
-        $response = $this->workflow->streamRun($this->workflowId);
+        $response = $this->workflow->stream($this->workflowId);
 
         // 验证响应
         $this->assertInstanceOf(StreamResponse::class, $response);
@@ -83,11 +83,11 @@ class WorkflowTest extends TestCase
             'user_id' => '12345',
             'user_name' => 'George',
         ];
-        $response = $this->workflow->streamRun($this->workflowId, ['parameters' => $parameters]);
+        $response = $this->workflow->stream($this->workflowId, ['parameters' => $parameters]);
         $this->assertInstanceOf(StreamResponse::class, $response);
     }
 
-    public function test_resume_method(): void
+    public function test_resume(): void
     {
         // 模拟响应数据
         $chunks = [
@@ -111,7 +111,7 @@ class WorkflowTest extends TestCase
         $this->assertInstanceOf(StreamResponse::class, $response);
     }
 
-    public function test_chat_method(): void
+    public function test_chat(): void
     {
         // 模拟响应数据
         $chunks = [
@@ -136,14 +136,12 @@ class WorkflowTest extends TestCase
                 'content' => 'Hello, how are you?',
             ],
         ];
-        $response = $this->workflow->chat($this->workflowId, $messages);
+        $response = $this->workflow->chat($this->workflowId, [
+            'bot_id' => '7484523878849822754',
+            'additional_messages' => $messages,
+        ]);
 
         // 验证响应
-        $this->assertInstanceOf(StreamResponse::class, $response);
-
-        // 测试带有额外参数的情况
-        $this->coze->mock('v1/workflow/chat', $streamResponse);
-        $response = $this->workflow->chat($this->workflowId, $messages, ['bot_id' => '7484523878849822754']);
         $this->assertInstanceOf(StreamResponse::class, $response);
     }
 }
