@@ -141,7 +141,7 @@ class ChatTest extends TestCase
     public function test_retrieve(): void
     {
         // 调用retrieve方法
-        $response = $this->coze->chat()->retrieve($this->chatId, $this->conversationId);
+        $response = $this->coze->chat()->retrieve($this->conversationId, $this->chatId);
 
         // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);
@@ -154,9 +154,7 @@ class ChatTest extends TestCase
     public function test_list_messages(): void
     {
         // 调用listMessages方法
-        $response = $this->coze->chat()->listMessages([
-            'conversation_id' => $this->conversationId,
-        ]);
+        $response = $this->coze->chat()->listMessages($this->conversationId, $this->chatId);
 
         // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);
@@ -168,14 +166,10 @@ class ChatTest extends TestCase
     public function test_submit_tool_outputs(): void
     {
         // 调用submitToolOutputs方法
-        $response = $this->coze->chat()->submitToolOutputs([
-            'chat_id' => $this->chatId,
-            'conversation_id' => $this->conversationId,
-            'tool_outputs' => [
-                [
-                    'tool_call_id' => 'tool_call_123',
-                    'output' => '{"result": "success"}',
-                ],
+        $response = $this->coze->chat()->submitToolOutputs($this->conversationId, $this->chatId, [
+            [
+                'tool_call_id' => 'tool_call_123',
+                'output' => '{"result": "success"}',
             ],
         ]);
 
@@ -189,7 +183,7 @@ class ChatTest extends TestCase
     public function test_cancel(): void
     {
         // 调用cancel方法
-        $response = $this->coze->chat()->cancel($this->chatId, $this->conversationId);
+        $response = $this->coze->chat()->cancel($this->conversationId, $this->chatId);
 
         // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);

@@ -14,15 +14,14 @@ $response = $coze->chat()->chat(
     '7484523878849822754', // 机器人ID
     'test_user_123',       // 用户ID
     [
-        'query' => '你好，请介绍一下自己',
         'auto_save_history' => true,
         'stream' => false,
         'messages' => [
             [
                 'role' => 'user',
-                'content' => '你好，请介绍一下自己'
-            ]
-        ]
+                'content' => '你好，请介绍一下自己',
+            ],
+        ],
     ]
 );
 

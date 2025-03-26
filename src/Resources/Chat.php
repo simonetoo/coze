@@ -38,7 +38,7 @@ class Chat extends Resource
      * @see zh:https://www.coze.cn/open/docs/developer_guides/retrieve_chat
      * @see en:https://www.coze.com/open/docs/developer_guides/retrieve_chat
      */
-    public function retrieve(string $chatId, string $conversationId): JsonResponse
+    public function retrieve(string $conversationId, string $chatId): JsonResponse
     {
         return $this->client->get('/v3/chat/retrieve', [
             'chat_id' => $chatId,
@@ -49,16 +49,18 @@ class Chat extends Resource
     /**
      * 获取聊天消息列表
      *
-     * @param  array  $payload  查询参数
      *
      * @throws ApiException
      *
      * @see zh:https://www.coze.cn/open/docs/developer_guides/list_chat_messages
      * @see en:https://www.coze.com/open/docs/developer_guides/list_chat_messages
      */
-    public function listMessages(array $payload): JsonResponse
+    public function listMessages(string $conversationId, string $chatId): JsonResponse
     {
-        return $this->client->get('/v3/chat/message/list', $payload);
+        return $this->client->get('/v3/chat/message/list', [
+            'conversation_id' => $conversationId,
+            'chat_id' => $chatId,
+        ]);
     }
 
     /**
@@ -71,8 +73,19 @@ class Chat extends Resource
      * @see zh:https://www.coze.cn/open/docs/developer_guides/chat_submit_tool_outputs
      * @see en:https://www.coze.com/open/docs/developer_guides/chat_submit_tool_outputs
      */
-    public function submitToolOutputs(array $payload): JsonResponse
-    {
+    public function submitToolOutputs(
+        string $conversationId,
+        string $chatId,
+        array $toolOutputs,
+        array $payload = []
+    ): JsonResponse {
+        $payload['conversation_id'] = $conversationId;
+        $payload['chat_id'] = $chatId;
+        $payload['tool_outputs'] = $toolOutputs;
+        if (! isset($payload['stream'])) {
+            $payload['stream'] = false;
+        }
+
         return $this->client->postJson('/v3/chat/submit_tool_outputs', $payload);
     }
 
@@ -87,7 +100,7 @@ class Chat extends Resource
      * @see zh:https://www.coze.cn/open/docs/developer_guides/chat_cancel
      * @see en:https://www.coze.com/open/docs/developer_guides/chat_cancel
      */
-    public function cancel(string $chatId, string $conversationId): JsonResponse
+    public function cancel(string $conversationId, string $chatId): JsonResponse
     {
         return $this->client->postJson('/v3/chat/cancel', [
             'chat_id' => $chatId,
