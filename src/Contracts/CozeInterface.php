@@ -4,6 +4,7 @@ namespace Simonetoo\Coze\Contracts;
 
 use Simonetoo\Coze\Http\HttpClient;
 use Simonetoo\Coze\Resources\Bot;
+use Simonetoo\Coze\Resources\Chat;
 use Simonetoo\Coze\Resources\Conversation;
 use Simonetoo\Coze\Resources\Dataset;
 use Simonetoo\Coze\Resources\File;
@@ -46,4 +47,9 @@ interface CozeInterface
      * 获取会话资源
      */
     public function conversation(): Conversation;
+
+    /**
+     * 获取聊天资源
+     */
+    public function chat(): Chat;
 }
