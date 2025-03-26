@@ -3,7 +3,6 @@
 namespace Simonetoo\Coze\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
@@ -121,7 +120,7 @@ class HttpClient implements HttpClientInterface
      *
      * @throws ApiException 请求异常
      */
-    protected function request(
+    public function request(
         string $method,
         string $path,
         array $options = []

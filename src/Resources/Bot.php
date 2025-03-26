@@ -76,6 +76,7 @@ class Bot extends Resource
     public function update(string $botId, array $payload = []): JsonResponse
     {
         $payload['bot_id'] = $botId;
+
         return $this->client->postJson('/v1/bot/update', $payload);
     }
 }

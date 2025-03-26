@@ -2,12 +2,21 @@
 
 namespace Simonetoo\Coze\Contracts;
 
+use Psr\Http\Message\ResponseInterface;
 use Simonetoo\Coze\Exceptions\ApiException;
 use Simonetoo\Coze\Http\JsonResponse;
 use Simonetoo\Coze\Http\StreamResponse;
 
 interface HttpClientInterface
 {
+    /**
+     * 发起请求
+     *
+     *
+     * @throws ApiException
+     */
+    public function request(string $method, string $path, array $options = []): ResponseInterface;
+
     /**
      * 发送GET请求
      *

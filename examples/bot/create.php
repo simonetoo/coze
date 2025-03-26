@@ -12,10 +12,6 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-$spaceId = '7484524201249194023';
-
-echo "创建新机器人...\n";
-
 $response = $client->bot()->create(
     '7484524201249194023',
     '测试机器人_'.date('YmdHis')

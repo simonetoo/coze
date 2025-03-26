@@ -12,10 +12,6 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-$datasetId = '7484881587176734755';
-$documentId = '7485662116432134183';
-
-// 查询上传进度
-$response = $client->knowledge()->process($datasetId, $documentId);
+$response = $client->knowledge()->process('7484881587176734755', '7485662116432134183');
 
 echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

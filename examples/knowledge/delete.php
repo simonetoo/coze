@@ -12,7 +12,6 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-
 echo '确认删除? (y/n): ';
 $confirmation = trim(fgets(STDIN));
 
