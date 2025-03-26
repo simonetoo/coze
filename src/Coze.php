@@ -17,6 +17,7 @@ use Simonetoo\Coze\Resources\Dataset;
 use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
 use Simonetoo\Coze\Resources\Resource;
+use Simonetoo\Coze\Resources\Workflow;
 
 class Coze implements CozeInterface
 {
@@ -74,6 +75,14 @@ class Coze implements CozeInterface
     public function knowledge(): Knowledge
     {
         return $this->getResource(Knowledge::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function workflow(): Workflow
+    {
+        return $this->getResource(Workflow::class);
     }
 
     /**

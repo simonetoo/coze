@@ -7,6 +7,7 @@ use Simonetoo\Coze\Resources\Bot;
 use Simonetoo\Coze\Resources\Dataset;
 use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
+use Simonetoo\Coze\Resources\Workflow;
 
 interface CozeInterface
 {
@@ -34,4 +35,9 @@ interface CozeInterface
      * 获取知识库资源
      */
     public function knowledge(): Knowledge;
+
+    /**
+     * 获取Workflow API资源
+     */
+    public function workflow(): Workflow;
 }
