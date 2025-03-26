@@ -32,13 +32,13 @@ composer install
 本项目遵循PSR-12编码规范。在提交代码前，请运行代码风格检查：
 
 ```bash
-composer cs-check
+composer pint --test
 ```
 
 如需自动修复代码风格问题：
 
 ```bash
-composer cs-fix
+composer pint
 ```
 
 ### 测试
