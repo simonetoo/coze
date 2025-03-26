@@ -9,6 +9,7 @@ use Simonetoo\Coze\Resources\Conversation;
 use Simonetoo\Coze\Resources\Dataset;
 use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
+use Simonetoo\Coze\Resources\Message;
 use Simonetoo\Coze\Resources\Workspace;
 
 interface CozeInterface
@@ -52,4 +53,9 @@ interface CozeInterface
      * 获取聊天资源
      */
     public function chat(): Chat;
+
+    /**
+     * 获取消息资源
+     */
+    public function message(): Message;
 }

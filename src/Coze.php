@@ -18,6 +18,7 @@ use Simonetoo\Coze\Resources\Conversation;
 use Simonetoo\Coze\Resources\Dataset;
 use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
+use Simonetoo\Coze\Resources\Message;
 use Simonetoo\Coze\Resources\Resource;
 use Simonetoo\Coze\Resources\Workspace;
 
@@ -101,6 +102,14 @@ class Coze implements CozeInterface
     public function chat(): Chat
     {
         return $this->getResource(Chat::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function message(): Message
+    {
+        return $this->getResource(Message::class);
     }
 
     /**
