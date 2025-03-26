@@ -12,18 +12,9 @@ $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
 
-try {
-    // 语音合成示例
-    $voiceId = 'alloy'; // 使用默认音色
-    $text = '这是一个测试文本，用于演示语音合成功能。';
+$response = $client->audio()->speech('7468518753626652709', '这是一个测试文本，用于演示语音合成功能。');
 
-    $response = $client->audio()->speech($voiceId, $text);
+$audio = __DIR__.'/../../temp/audio.mp3';
+file_put_contents($audio, $response->getBody());
 
-    // 保存合成的音频文件
-    $audioFile = __DIR__.'/speech_output.mp3';
-    file_put_contents($audioFile, $response->getBody());
-
-    echo "语音合成成功，文件已保存到: $audioFile\n";
-} catch (Exception $e) {
-    echo '错误: '.$e->getMessage()."\n";
-}
+echo "语音合成成功，文件已保存到: $audio\n";

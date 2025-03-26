@@ -2,7 +2,7 @@
 
 namespace Simonetoo\Coze\Tests\Resources;
 
-use Coze\Resources\Audio;
+use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Simonetoo\Coze\Coze;
@@ -12,16 +12,14 @@ class AudioTest extends TestCase
 {
     private Coze $coze;
 
-    private string $voiceId = 'alloy';
-
-    private string $audioPath = '/path/to/test/audio.mp3';
-
     protected function setUp(): void
     {
         $this->coze = Coze::fake();
 
         // 由于Audio类在Coze\Resources命名空间下，我们需要手动创建实例
-        $this->coze->mock('v1/audio/speech', $this->createMock(ResponseInterface::class));
+        $this->coze->mock('v1/audio/speech', function () {
+            return new Response(200, [], '');
+        });
         $this->coze->mock('v1/audio/transcriptions', [
             'text' => '这是从音频文件中识别出的文本内容。',
             'duration' => 5.2,
@@ -29,35 +27,32 @@ class AudioTest extends TestCase
         ]);
     }
 
-    public function test_speech_method(): void
+    public function test_speech(): void
     {
         // 跳过此测试，因为需要实际的Audio实例
-        $this->markTestSkipped('需要实际的Audio实例才能测试');
-
-        /* 实际项目中应该这样实现:
-        $audio = new Audio($this->coze->getHttpClient());
-        $text = '这是一个测试文本，用于演示语音合成功能。';
-
-        $response = $audio->speech($this->voiceId, $text);
+        $response = $this->coze->audio()->speech('7468518753626800165', '这是从音频文件中识别出的文本内容');
         $this->assertInstanceOf(ResponseInterface::class, $response);
-        */
     }
 
-    public function test_transcription_method(): void
+    public function test_transcription(): void
     {
-        // 跳过此测试，因为需要实际的Audio实例
-        $this->markTestSkipped('需要实际的Audio实例才能测试');
 
-        /* 实际项目中应该这样实现:
-        $audio = new Audio($this->coze->getHttpClient());
-        $response = $audio->transcription($this->audioPath);
+        // 模拟响应数据
+        $responseData = [
+            'code' => 0,
+            'data' => [
+                'text' => '测试文本',
+            ],
+        ];
 
+        // 模拟HTTP响应
+        $this->coze->mock('/v1/audio/transcriptions', $responseData);
+
+        // 调用get方法
+        $response = $this->coze->audio()->transcription('/path/to/audio.mp3');
+
+        // 验证响应
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals([
-            'text' => '这是从音频文件中识别出的文本内容。',
-            'duration' => 5.2,
-            'language' => 'zh',
-        ], $response->json());
-        */
+        $this->assertEquals($responseData, $response->json());
     }
 }

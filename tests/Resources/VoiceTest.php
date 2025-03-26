@@ -2,7 +2,6 @@
 
 namespace Simonetoo\Coze\Tests\Resources;
 
-use Coze\Resources\Voice;
 use PHPUnit\Framework\TestCase;
 use Simonetoo\Coze\Coze;
 use Simonetoo\Coze\Http\JsonResponse;
@@ -41,56 +40,48 @@ class VoiceTest extends TestCase
         ]);
     }
 
-    public function test_list_method(): void
+    public function test_list(): void
     {
-        // 跳过此测试，因为需要实际的Voice实例
-        $this->markTestSkipped('需要实际的Voice实例才能测试');
-
-        /* 实际项目中应该这样实现:
-        $voice = new Voice($this->coze->getHttpClient());
-        $response = $voice->list();
-
-        $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals([
-            'voices' => [
-                [
-                    'id' => 'alloy',
-                    'name' => 'Alloy',
-                    'description' => '标准音色',
-                    'language' => 'zh',
+        $responseData = [
+            'code' => 0,
+            'msg' => 'Success',
+            'data' => [
+                'voice_list' => [
+                    [
+                        'voice_id' => 'alloy',
+                        'name' => 'Alloy',
+                        'description' => '标准音色',
+                        'language' => 'zh',
+                    ],
+                    [
+                        'voice_id' => 'echo',
+                        'name' => 'Echo',
+                        'description' => '清晰音色',
+                        'language' => 'zh',
+                    ],
                 ],
-                [
-                    'id' => 'echo',
-                    'name' => 'Echo',
-                    'description' => '清晰音色',
-                    'language' => 'zh',
-                ],
+
             ],
-        ], $response->json());
-        */
+        ];
+        $this->coze->mock('v1/audio/voices', $responseData);
+        $response = $this->coze->voice()->list();
+        // 验证响应
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertEquals($responseData, $response->json());
     }
 
-    public function test_clone_method(): void
+    public function test_clone(): void
     {
-        // 跳过此测试，因为需要实际的Voice实例
-        $this->markTestSkipped('需要实际的Voice实例才能测试');
-
-        /* 实际项目中应该这样实现:
-        $voice = new Voice($this->coze->getHttpClient());
-        $voiceName = '测试音色';
-        $payload = [
-            'description' => '这是一个通过API创建的测试音色',
+        $responseData = [
+            'code' => 0,
+            'msg' => 'Success',
+            'data' => [
+                'voice_id' => '7486015075111862326',
+            ],
         ];
-
-        $response = $voice->clone($voiceName, $payload);
-
+        $this->coze->mock('v1/audio/voices/clone', $responseData);
+        $response = $this->coze->voice()->clone('test', '/path/to/voice.mp3');
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals([
-            'voice_id' => 'custom_voice_123456',
-            'name' => '测试音色',
-            'status' => 'processing',
-            'created_at' => 1715847583,
-        ], $response->json());
-        */
+        $this->assertEquals($responseData, $response->json());
     }
 }

@@ -12,6 +12,7 @@ use Simonetoo\Coze\Http\HttpClient;
 use Simonetoo\Coze\Http\JsonResponse;
 use Simonetoo\Coze\Http\Response;
 use Simonetoo\Coze\Http\StreamResponse;
+use Simonetoo\Coze\Resources\Audio;
 use Simonetoo\Coze\Resources\Bot;
 use Simonetoo\Coze\Resources\Chat;
 use Simonetoo\Coze\Resources\Conversation;
@@ -20,6 +21,7 @@ use Simonetoo\Coze\Resources\File;
 use Simonetoo\Coze\Resources\Knowledge;
 use Simonetoo\Coze\Resources\Message;
 use Simonetoo\Coze\Resources\Resource;
+use Simonetoo\Coze\Resources\Voice;
 use Simonetoo\Coze\Resources\Workflow;
 use Simonetoo\Coze\Resources\Workspace;
 
@@ -116,6 +118,16 @@ class Coze implements CozeInterface
     public function workflow(): Workflow
     {
         return $this->getResource(Workflow::class);
+    }
+
+    public function audio(): Audio
+    {
+        return $this->getResource(Audio::class);
+    }
+
+    public function voice(): Voice
+    {
+        return $this->getResource(Voice::class);
     }
 
     /**

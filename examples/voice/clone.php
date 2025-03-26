@@ -11,25 +11,15 @@ use Simonetoo\Coze\Coze;
 $client = new Coze([
     'token' => 'pat_e44qxZ0p9VCw0ImW7FLgyE6qWTd7IMGCiKnUAdaqfJKQ3jRkdXeYgEnZSnlGxigL',
 ]);
-
-try {
-    // 复刻音色示例
-    $voiceName = '测试音色_'.date('YmdHis');
-
-    // 可选参数
-    $payload = [
-        'description' => '这是一个通过API创建的测试音色',
-        // 如果需要上传音频样本，可以添加以下代码
-        // 'files' => [
-        //     fopen('/path/to/audio/sample.mp3', 'r')
-        // ]
-    ];
-
-    $response = $client->voice()->clone($voiceName, $payload);
-
-    echo "复刻音色结果:\n";
-    echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    echo "\n";
-} catch (Exception $e) {
-    echo '错误: '.$e->getMessage()."\n";
+$audio = __DIR__.'/../../temp/audio.mp3';
+$text = '这是一个测试文本，用于演示语音合成功能。';
+if (! file_exists($audio)) {
+    $response = $client->audio()->speech('7468518753626652709', $text);
+    file_put_contents($audio, $response->getBody());
 }
+
+$response = $client->voice()->clone('SDK测试', $audio, [
+    'preview_text' => $text,
+]);
+
+echo json_encode($response->json(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

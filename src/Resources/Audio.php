@@ -1,11 +1,10 @@
 <?php
 
-namespace Coze\Resources;
+namespace Simonetoo\Coze\Resources;
 
 use Psr\Http\Message\ResponseInterface;
 use Simonetoo\Coze\Exceptions\ApiException;
 use Simonetoo\Coze\Http\JsonResponse;
-use Simonetoo\Coze\Resources\Resource;
 
 class Audio extends Resource
 {
