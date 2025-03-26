@@ -120,7 +120,7 @@ class HttpClient implements HttpClientInterface
      *
      * @throws ApiException 请求异常
      */
-    protected function request(
+    public function request(
         string $method,
         string $path,
         array $options = []
