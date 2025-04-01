@@ -28,11 +28,9 @@ class HttpClient implements HttpClientInterface
             $headers['Authorization'] = "Bearer {$options['token']}";
         }
         $headers['Agw-Js-Conv'] = 'str';
-        $this->client = new GuzzleClient([
-            ...$options,
-            'base_uri' => $options['base_uri'] ?? 'https://api.coze.cn',
-            'headers' => $headers,
-        ]);
+        $options['base_uri'] = $options['base_uri'] ?? 'https://api.coze.cn';
+        $options['headers'] = $headers;
+        $this->client = new GuzzleClient($options);
     }
 
     /**
